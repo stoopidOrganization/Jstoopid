@@ -1,3 +1,5 @@
+package main;
+
 public class lib {
     /**
      * @param str string to check

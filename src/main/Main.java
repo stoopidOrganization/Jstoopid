@@ -1,11 +1,18 @@
+package main;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import variables.VariableManager;
+
 public class Main {
     public static String filename;
+    public static variables.VariableManager varMan;
 
     public static void main(String[] args) {
+        varMan = new VariableManager();
+
         try {
             filename = args[0];
         } catch (IndexOutOfBoundsException e) {
@@ -30,13 +37,6 @@ public class Main {
 
             switch (linepieces[0]) {
                 case "var":
-                    if (lib.isNumber(linepieces[3])) {
-                        System.out.println("Variable is a number");
-                    } else if (lib.isBool(linepieces[3])) {
-                        System.out.println("Variable is a boolean");
-                    } else {
-                        System.out.println("Variable is a string");
-                    }
                     break;
 
                 case "out":
