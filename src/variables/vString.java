@@ -1,10 +1,11 @@
 package variables;
 
-public class String extends Variable {
+public class vString extends Variable {
     private String value;
     
-    public String(String name, double value) {
+    public vString(String name, String value) {
         super(name);
+        this.value = value;
     }
     
     public String getValue() {
@@ -13,5 +14,10 @@ public class String extends Variable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

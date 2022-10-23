@@ -5,6 +5,7 @@ public class Number extends Variable {
     
     public Number(String name, double value) {
         super(name);
+        this.value = value;
     }
     
     public double getValue() {
@@ -13,5 +14,10 @@ public class Number extends Variable {
 
     public void setValue(double value) {
         this.value = value;
+    }
+        
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

@@ -37,10 +37,13 @@ public class Main {
 
             switch (linepieces[0]) {
                 case "var":
+                    if (linepieces[2].equals("=")) {
+                        varMan.newVariable(linepieces[1], linepieces[3]);
+                    }
                     break;
 
                 case "out":
-                    System.out.println("print statement");
+                    System.out.println(varMan.getVariable(linepieces[1]));
                     break;
             
                 default:
