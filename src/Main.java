@@ -47,7 +47,7 @@ public class Main {
                     break;
             }
         }
-
+        
         reader.close();
     }
 }
