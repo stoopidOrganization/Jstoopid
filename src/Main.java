@@ -25,7 +25,27 @@ public class Main {
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
-            System.out.println(line);
+
+            String[] linepieces = line.split(" ");
+
+            switch (linepieces[0]) {
+                case "var":
+                    if (lib.isNumber(linepieces[3])) {
+                        System.out.println("Variable is a number");
+                    } else if (lib.isBool(linepieces[3])) {
+                        System.out.println("Variable is a boolean");
+                    } else {
+                        System.out.println("Variable is a string");
+                    }
+                    break;
+
+                case "out":
+                    System.out.println("print statement");
+                    break;
+            
+                default:
+                    break;
+            }
         }
 
         reader.close();
