@@ -2,17 +2,33 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import variables.VariableManager;
 
+/**
+ * Main class of the Project
+ */
 public class Main {
+    /**
+     * Name of the File to be executed
+     */
     public static String filename;
+    /**
+     * cache for all lines of the file
+     */
+    public static ArrayList<String> lines;
+    /**
+     * Manages all Variables
+     */
     public static variables.VariableManager varMan;
 
     public static void main(String[] args) {
         varMan = new VariableManager();
+        lines = new ArrayList<>();
 
+        // Get Filename from arguments
         try {
             filename = args[0];
         } catch (IndexOutOfBoundsException e) {
@@ -20,8 +36,8 @@ public class Main {
             filename = "test.jstpd";
         }
 
+        // load file
         Scanner reader;
-
         try {
             File file = new File(filename);
             reader = new Scanner(file);
@@ -30,9 +46,13 @@ public class Main {
             return;
         }
 
+        // cache the code
         while (reader.hasNextLine()) {
-            String line = reader.nextLine();
+            lines.add(reader.nextLine());
+        }
 
+        // run the code
+        for (String line : lines) {
             String[] linepieces = line.split(" ");
 
             switch (linepieces[0]) {

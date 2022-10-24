@@ -1,5 +1,9 @@
 package main;
 
+/**
+ * Contains some Standart functions used all over the Project
+ * Methods here should be static
+ */
 public class lib {
     /**
      * @param str string to check
