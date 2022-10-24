@@ -33,4 +33,12 @@ public class Number extends Variable {
     public void setValue(double value) {
         this.value = value;
     }
+    
+    @Override
+    /**
+     * returns the Value of the Variable as String
+     */
+    public String toString() {
+        return String.valueOf(this.value);
+    }
 }

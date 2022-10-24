@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class VariableManager {
     private ArrayList<Bool> bools;
     private ArrayList<Number> numbers;
-    private ArrayList<String> strings;
+    private ArrayList<vString> strings;
 
     /**
      * Initializes the Lists for the global Variables
@@ -34,7 +34,7 @@ public class VariableManager {
             if(i.getName().equals(name)) return i;
         }
 
-        for (String i : strings) {
+        for (vString i : strings) {
             if(i.getName().equals(name)) return i;
         }
 

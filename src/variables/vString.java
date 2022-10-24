@@ -4,7 +4,7 @@ package variables;
  * Variable of type String,
  * Child of Variable
  */
-public class String extends Variable {
+public class vString extends Variable {
     /**
      * Value of the Variable
      */
@@ -15,7 +15,7 @@ public class String extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public String(String name, double value) {
+    public vString(String name, double value) {
         super(name);
     }
     
@@ -32,5 +32,13 @@ public class String extends Variable {
      */
     public void setValue(String value) {
         this.value = value;
+    }
+    
+    @Override
+    /**
+     * returns the Value of the Variable as String
+     */
+    public String toString() {
+        return String.valueOf(this.value);
     }
 }
