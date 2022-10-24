@@ -8,7 +8,7 @@ package variables;
  * Child of Variable
  * </p>
  */
-public class Bool extends Variable {
+public class stdpBool extends Variable {
     /**
      * Value of the Variable
      */
@@ -19,7 +19,7 @@ public class Bool extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public Bool(String name, boolean value) {
+    public stdpBool(String name, boolean value) {
         super(name);
         this.value = value;
     }
