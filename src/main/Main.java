@@ -52,7 +52,8 @@ public class Main {
         }
 
         // run the code
-        for (String line : lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
             String[] linepieces = line.split(" ");
 
             switch (linepieces[0]) {
@@ -64,6 +65,10 @@ public class Main {
 
                 case "out":
                     System.out.println(varMan.getVariable(linepieces[1]));
+                    break;
+
+                case "goto":
+                    i = Integer.parseInt(linepieces[1]) - 2;
                     break;
             
                 default:
