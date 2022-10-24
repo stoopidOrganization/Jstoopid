@@ -8,9 +8,18 @@ import java.util.Scanner;
 import variables.VariableManager;
 
 public class Main {
+    /**
+     * Name of the File to be executed
+     */
     public static String filename;
-    public static variables.VariableManager varMan;
+    /**
+     * cache for all lines of the file
+     */
     public static ArrayList<String> lines;
+    /**
+     * Manages all Variables
+     */
+    public static variables.VariableManager varMan;
 
     public static void main(String[] args) {
         varMan = new VariableManager();
