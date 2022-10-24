@@ -26,6 +26,20 @@ public class VariableManager {
         this.strs = new ArrayList<>();
     }
 
+    /**
+     * <p>Get Type of a given Value</p>
+     * <ul>
+     *     <li>Can Be:<br>
+     *         <ul>
+     *             <li>bool</li>
+     *             <li>num</li>
+     *             <li>str</li>
+     *         </ul>
+     *     </li>
+     * </ul>
+     * @param value
+     * @return type of value
+     */
     public String getType(String value) {
         if (lib.isBool(value)) {
             return "boolean";
@@ -36,6 +50,20 @@ public class VariableManager {
         }
     }
 
+    /**
+     * <p>Get Type of a Variable by given Name</p>
+     * <ul>
+     *     <li>Can Be:<br>
+     *         <ul>
+     *             <li>bool</li>
+     *             <li>num</li>
+     *             <li>str</li>
+     *         </ul>
+     *     </li>
+     * </ul>
+     * @param name of the Variable
+     * @return type of Variable
+     */
     public String getVariableType(String name) {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return "bool";
@@ -52,6 +80,11 @@ public class VariableManager {
         return null;
     }
 
+    /**
+     * Get the value of a Variable with type bool
+     * @param name of the Variable
+     * @return value of the Variable
+     */
     public stdpBool getBoolVariable(String name) {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i;
@@ -60,6 +93,11 @@ public class VariableManager {
         return null;
     }
 
+    /**
+     * Get the value of a Variable with type num
+     * @param name of the Variable
+     * @return value of the Variable
+     */
     public stdpNum getNumVariable(String name) {
         for (stdpNum i : nums) {
             if(i.getName().equals(name)) return i;
@@ -68,6 +106,11 @@ public class VariableManager {
         return null;
     }
 
+    /**
+     * Get the value of a Variable with type str
+     * @param name of the Variable
+     * @return value of the Variable
+     */
     public stdpStr getStrVariable(String name) {
         for (stdpStr i : strs) {
             if(i.getName().equals(name)) return i;
@@ -77,9 +120,8 @@ public class VariableManager {
     }
 
     /**
-     * Gets the Variable as an Object
      * @param name of the Variable
-     * @return Variable as Object
+     * @return if variable exists
      */
     public boolean isVariable(String name) {
         for (stdpBool i : bools) {
@@ -114,6 +156,11 @@ public class VariableManager {
         }
     }
 
+    /**
+     * Returns Value of any Variable as a String
+     * @param name of the Variable
+     * @return value of the Variable as String
+     */
     public String getVariableAsString(String name) {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
@@ -130,6 +177,11 @@ public class VariableManager {
         return null;
     }
 
+    /**
+     * Changes the Value of amy Variable
+     * @param name of the variable
+     * @param value that the variable should be set to
+     */
     public void changeVariable(String name, String value) {
         switch (getType(value)) {
             case "bool":
