@@ -72,6 +72,9 @@ public class Main {
                     break;
             
                 default:
+                    if(varMan.getVariable(linepieces[0]) != null && linepieces[1].equals("=")) {
+                        // TODO add setVar here
+                    }
                     break;
             }
         }
