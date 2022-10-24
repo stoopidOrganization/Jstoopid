@@ -1,8 +1,12 @@
 package variables;
 
 /**
- * Variable of type Boolean,
+ * <p>
+ * Variable of type Boolean
+ * </p>
+ * <p>
  * Child of Variable
+ * </p>
  */
 public class Bool extends Variable {
     /**
