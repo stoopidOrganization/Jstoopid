@@ -8,7 +8,7 @@ package variables;
  * Child of Variable
  * </p>
  */
-public class stdpString extends Variable {
+public class stdpStr extends Variable {
     /**
      * Value of the Variable
      */
@@ -19,7 +19,7 @@ public class stdpString extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public stdpString(String name, String value) {
+    public stdpStr(String name, String value) {
         super(name);
         this.value = value;
     }
