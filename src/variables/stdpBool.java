@@ -3,8 +3,7 @@ package variables;
 /**
  * <p>
  * Variable of type Boolean
- * </p>
- * <p>
+ * <br><br>
  * Child of Variable
  * </p>
  */

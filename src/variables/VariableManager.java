@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import main.lib;
 
 /**
- * Manages all the Variables,
+ * <p>
+ * Manages all the Variables
+ * <br><br>
  * Contains all Variable indexes
+ * </p>
  */
 
 public class VariableManager {
