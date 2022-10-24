@@ -1,7 +1,10 @@
 var a = 1.1
+var b = true
 
 out a
+out b
 
 a = 2
+b = false
 
 goto 3
