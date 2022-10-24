@@ -33,4 +33,9 @@ public class lib {
         
         return isBool;
     }
+
+    public static String getValue() {
+        // TODO implement getValue
+        return "PLACEHOLDER";
+    }
 }
