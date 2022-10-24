@@ -2,13 +2,13 @@ package variables;
 
 /**
  * <p>
- * Variable of type Boolean
+ * Variable of type String
  * </p>
  * <p>
  * Child of Variable
  * </p>
  */
-public class vString extends Variable {
+public class stdpString extends Variable {
     /**
      * Value of the Variable
      */
@@ -19,7 +19,7 @@ public class vString extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public vString(String name, String value) {
+    public stdpString(String name, String value) {
         super(name);
         this.value = value;
     }

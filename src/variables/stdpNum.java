@@ -2,13 +2,13 @@ package variables;
 
 /**
  * <p>
- * Variable of type Boolean
+ * Variable of type Number
  * </p>
  * <p>
  * Child of Variable
  * </p>
  */
-public class Number extends Variable {
+public class stdpNum extends Variable {
     /**
      * Value of the Variable
      */
@@ -19,7 +19,7 @@ public class Number extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public Number(String name, double value) {
+    public stdpNum(String name, double value) {
         super(name);
         this.value = value;
     }

@@ -10,9 +10,9 @@ import main.lib;
  */
 
 public class VariableManager {
-    private ArrayList<Bool> bools;
-    private ArrayList<Number> numbers;
-    private ArrayList<vString> strings;
+    private ArrayList<stdpBool> bools;
+    private ArrayList<stdpNum> numbers;
+    private ArrayList<stdpString> strings;
 
     /**
      * Initializes the Lists for the global Variables
@@ -34,39 +34,39 @@ public class VariableManager {
     }
 
     public String getVariableType(String name) {
-        for (Bool i : bools) {
+        for (stdpBool i : bools) {
             if(i.getName().equals(name)) return "bool";
         }
 
-        for (Number i : numbers) {
+        for (stdpNum i : numbers) {
             if(i.getName().equals(name)) return "number";
         }
 
-        for (vString i : strings) {
+        for (stdpString i : strings) {
             if(i.getName().equals(name)) return "string";
         }
 
         return null;
     }
 
-    public Bool getBoolVariable(String name) {
-        for (Bool i : bools) {
+    public stdpBool getBoolVariable(String name) {
+        for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i;
         }
 
         return null;
     }
 
-    public Number getNumberVariable(String name) {
-        for (Number i : numbers) {
+    public stdpNum getNumberVariable(String name) {
+        for (stdpNum i : numbers) {
             if(i.getName().equals(name)) return i;
         }
 
         return null;
     }
 
-    public vString getStringVariable(String name) {
-        for (vString i : strings) {
+    public stdpString getStringVariable(String name) {
+        for (stdpString i : strings) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -79,15 +79,15 @@ public class VariableManager {
      * @return Variable as Object
      */
     public boolean isVariable(String name) {
-        for (Bool i : bools) {
+        for (stdpBool i : bools) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (Number i : numbers) {
+        for (stdpNum i : numbers) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (vString i : strings) {
+        for (stdpString i : strings) {
             if(i.getName().equals(name)) return true;
         }
 
@@ -102,25 +102,25 @@ public class VariableManager {
     public void newVariable(String name, String value) {
         if (getStringVariable(name) != null || getNumberVariable(name) != null || getBoolVariable(name) != null) return;
 
-        if (lib.isNumber(value)) {
-            this.numbers.add(new Number(name, Double.parseDouble(value)));
+        if (lib.isBool(value)) {
+            this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
         } else if (lib.isNumber(value)) {
-            this.bools.add(new Bool(name, Boolean.parseBoolean(value)));
+            this.numbers.add(new stdpNum(name, Double.parseDouble(value)));
         } else {
-            this.strings.add(new vString(name, value));
+            this.strings.add(new stdpString(name, value));
         }
     }
 
     public String getVariableAsString(String name) {
-        for (Bool i : bools) {
+        for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (Number i : numbers) {
+        for (stdpNum i : numbers) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (vString i : strings) {
+        for (stdpString i : strings) {
             if(i.getName().equals(name)) return i.toString();
         }
 
