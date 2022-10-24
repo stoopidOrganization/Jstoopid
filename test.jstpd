@@ -2,4 +2,6 @@ var a = 1.1
 
 out a
 
+a = 2
+
 goto 3

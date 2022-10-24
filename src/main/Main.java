@@ -64,7 +64,7 @@ public class Main {
                     break;
 
                 case "out":
-                    System.out.println(varMan.getVariable(linepieces[1]));
+                    System.out.println(varMan.getVariableAsString(linepieces[1]));
                     break;
 
                 case "goto":
@@ -72,8 +72,8 @@ public class Main {
                     break;
             
                 default:
-                    if(varMan.getVariable(linepieces[0]) != null && linepieces[1].equals("=")) {
-                        // TODO add setVar here
+                    if(varMan.isVariable(linepieces[0]) && linepieces[1].equals("=")) {
+                        varMan.changeVariable(linepieces[0], linepieces[2]);
                     }
                     break;
             }
