@@ -11,25 +11,25 @@ import main.lib;
 
 public class VariableManager {
     private ArrayList<stdpBool> bools;
-    private ArrayList<stdpNum> numbers;
-    private ArrayList<stdpString> strings;
+    private ArrayList<stdpNum> nums;
+    private ArrayList<stdpStr> strs;
 
     /**
      * Initializes the Lists for the global Variables
      */
     public VariableManager() {
         this.bools = new ArrayList<>();
-        this.numbers = new ArrayList<>();
-        this.strings = new ArrayList<>();
+        this.nums = new ArrayList<>();
+        this.strs = new ArrayList<>();
     }
 
     public String getType(String value) {
         if (lib.isBool(value)) {
             return "boolean";
         } else if (lib.isNumber(value)) {
-            return "number";
+            return "num";
         } else {
-            return "string";
+            return "str";
         }
     }
 
@@ -38,11 +38,11 @@ public class VariableManager {
             if(i.getName().equals(name)) return "bool";
         }
 
-        for (stdpNum i : numbers) {
+        for (stdpNum i : nums) {
             if(i.getName().equals(name)) return "number";
         }
 
-        for (stdpString i : strings) {
+        for (stdpStr i : strs) {
             if(i.getName().equals(name)) return "string";
         }
 
@@ -57,16 +57,16 @@ public class VariableManager {
         return null;
     }
 
-    public stdpNum getNumberVariable(String name) {
-        for (stdpNum i : numbers) {
+    public stdpNum getNumVariable(String name) {
+        for (stdpNum i : nums) {
             if(i.getName().equals(name)) return i;
         }
 
         return null;
     }
 
-    public stdpString getStringVariable(String name) {
-        for (stdpString i : strings) {
+    public stdpStr getStrVariable(String name) {
+        for (stdpStr i : strs) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -83,11 +83,11 @@ public class VariableManager {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpNum i : numbers) {
+        for (stdpNum i : nums) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpString i : strings) {
+        for (stdpStr i : strs) {
             if(i.getName().equals(name)) return true;
         }
 
@@ -100,14 +100,14 @@ public class VariableManager {
      * @param value of the Variable
      */
     public void newVariable(String name, String value) {
-        if (getStringVariable(name) != null || getNumberVariable(name) != null || getBoolVariable(name) != null) return;
+        if (getStrVariable(name) != null || getNumVariable(name) != null || getBoolVariable(name) != null) return;
 
         if (lib.isBool(value)) {
             this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
         } else if (lib.isNumber(value)) {
-            this.numbers.add(new stdpNum(name, Double.parseDouble(value)));
+            this.nums.add(new stdpNum(name, Double.parseDouble(value)));
         } else {
-            this.strings.add(new stdpString(name, value));
+            this.strs.add(new stdpStr(name, value));
         }
     }
 
@@ -116,11 +116,11 @@ public class VariableManager {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpNum i : numbers) {
+        for (stdpNum i : nums) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpString i : strings) {
+        for (stdpStr i : strs) {
             if(i.getName().equals(name)) return i.toString();
         }
 
@@ -133,12 +133,12 @@ public class VariableManager {
                 getBoolVariable(name).setValue(Boolean.parseBoolean(value));
                 break;
 
-            case "number":
-                getNumberVariable(name).setValue(Double.parseDouble(value));
+            case "num":
+                getNumVariable(name).setValue(Double.parseDouble(value));
                 break;
 
-            case "string":
-                getStringVariable(name).setValue(value);
+            case "str":
+                getStrVariable(name).setValue(value);
                 break;
         
             default:
