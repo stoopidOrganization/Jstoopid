@@ -1,8 +1,12 @@
 package variables;
 
 /**
- * Variable of type Boolean,
+ * <p>
+ * Variable of type Boolean
+ * </p>
+ * <p>
  * Child of Variable
+ * </p>
  */
 public class Bool extends Variable {
     /**
@@ -17,6 +21,7 @@ public class Bool extends Variable {
      */
     public Bool(String name, boolean value) {
         super(name);
+        this.value = value;
     }
     
     /**

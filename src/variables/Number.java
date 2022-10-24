@@ -17,6 +17,7 @@ public class Number extends Variable {
      */
     public Number(String name, double value) {
         super(name);
+        this.value = value;
     }
     
     /**

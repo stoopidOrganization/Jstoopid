@@ -15,8 +15,9 @@ public class vString extends Variable {
      * @param name of the Variable
      * @param value of the Variable
      */
-    public vString(String name, double value) {
+    public vString(String name, String value) {
         super(name);
+        this.value = value;
     }
     
     /**

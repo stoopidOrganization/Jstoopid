@@ -2,10 +2,13 @@ package variables;
 
 import java.util.ArrayList;
 
+import main.lib;
+
 /**
  * Manages all the Variables,
  * Contains all Variable indexes
  */
+
 public class VariableManager {
     private ArrayList<Bool> bools;
     private ArrayList<Number> numbers;
@@ -47,5 +50,14 @@ public class VariableManager {
      * @param value of the Variable
      */
     public void newVariable(String name, String value) {
+        if (getVariable(name) != null) return;
+
+        if (lib.isNumber(value)) {
+            this.numbers.add(new Number(name, Double.parseDouble(value)));
+        } else if (lib.isNumber(value)) {
+            this.bools.add(new Bool(name, Boolean.parseBoolean(value)));
+        } else {
+            this.strings.add(new vString(name, value));
+        }
     }
 }
