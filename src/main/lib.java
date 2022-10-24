@@ -1,8 +1,11 @@
 package main;
 
 /**
- * Contains some Standart functions used all over the Project
- * Methods here should be static
+ * <p>
+ *  Contains some Standart functions used all over the Project
+ *  <br><br>
+ *  Methods here should be static
+ *  </p>
  */
 public class lib {
     /**

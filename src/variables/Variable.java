@@ -1,8 +1,11 @@
 package variables;
 
 /**
- * Parent of all Variables,
+ * <p>
+ * Parent of all Variables
+ * <br><br>
  * Contains some default code needed in all Variables
+ * </p>
  */
 public class Variable {
     /**
