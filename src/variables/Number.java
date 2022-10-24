@@ -1,5 +1,9 @@
 package variables;
 
+/**
+ * Variable of type Number,
+ * Child of Variable
+ */
 public class Number extends Variable {
     /**
      * Value of the Variable

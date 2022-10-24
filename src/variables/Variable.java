@@ -1,5 +1,9 @@
 package variables;
 
+/**
+ * Parent of all Variables,
+ * Contains some default code needed in all Variables
+ */
 public class Variable {
     /**
      * Name of the Variable

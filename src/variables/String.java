@@ -1,5 +1,9 @@
 package variables;
 
+/**
+ * Variable of type String,
+ * Child of Variable
+ */
 public class String extends Variable {
     /**
      * Value of the Variable

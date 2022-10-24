@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import variables.VariableManager;
 
+/**
+ * Main class of the Project
+ */
 public class Main {
     /**
      * Name of the File to be executed

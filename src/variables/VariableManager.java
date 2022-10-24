@@ -2,11 +2,18 @@ package variables;
 
 import java.util.ArrayList;
 
+/**
+ * Manages all the Variables,
+ * Contains all Variable indexes
+ */
 public class VariableManager {
     private ArrayList<Bool> bools;
     private ArrayList<Number> numbers;
     private ArrayList<String> strings;
 
+    /**
+     * Initializes the Lists for the global Variables
+     */
     public VariableManager() {
         this.bools = new ArrayList<>();
         this.numbers = new ArrayList<>();
