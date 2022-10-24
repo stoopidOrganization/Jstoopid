@@ -13,6 +13,11 @@ public class VariableManager {
         this.strings = new ArrayList<>();
     }
 
+    /**
+     * Gets the Variable as an Object
+     * @param name of the Variable
+     * @return Variable as Object
+     */
     public Variable getVariable(String name) {
         for (Bool i : bools) {
             if(i.getName().equals(name)) return i;
@@ -29,6 +34,11 @@ public class VariableManager {
         return null;
     }
 
+    /**
+     * Creates a new Variable
+     * @param name of the Variable
+     * @param value of the Variable
+     */
     public void newVariable(String name, String value) {
     }
 }
