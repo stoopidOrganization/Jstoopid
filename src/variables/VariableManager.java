@@ -11,7 +11,6 @@ import main.lib;
  * Contains all Variable indexes
  * </p>
  */
-
 public class VariableManager {
     private ArrayList<stdpBool> bools;
     private ArrayList<stdpNum> nums;
