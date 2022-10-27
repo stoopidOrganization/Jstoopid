@@ -47,11 +47,13 @@ public class lib {
         String result = null;
 
         if (isNumber(value)) {
-            // TODO implement number handling
+            result = value;
         } else if (isBool(value)) {
             result = value;
         } else if (isString(value)) {
             result = value;
+        } else if (Main.varMan.isVariable(value)) {
+            result = Main.varMan.getVariableAsString(value);
         } else {
             throw new InvalidTypeException(value);
         }
