@@ -8,6 +8,6 @@ public class InvalidTypeException extends Exception {
      * @param value that isnt any type
      */
     public InvalidTypeException(String value) {
-        super("The Type of " + value + " can't be resolved");
+        super("The Type of \'" + value + "\' can't be resolved");
     }
 }
