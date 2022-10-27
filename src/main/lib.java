@@ -1,6 +1,7 @@
 package main;
 
 import exceptions.InvalidTypeException;
+import exceptions.VariableNotFoundException;
 
 /**
  * <p>
@@ -43,7 +44,7 @@ public class lib {
         return false;
     }
 
-    public static String getValue(String value) throws InvalidTypeException {
+    public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
         String result = null;
 
         if (isNumber(value)) {
