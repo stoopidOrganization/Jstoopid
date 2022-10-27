@@ -37,8 +37,17 @@ public class lib {
         return isBool;
     }
 
-    public static String getValue() {
-        // TODO implement getValue
-        return "PLACEHOLDER";
+    public static String getValue(String value) {
+        String result = null;
+
+        if (isNumber(value)) {
+            // TODO implement number handling
+        } else if (isBool(value)) {
+            result = value;
+        } else {
+            result = value;
+        }
+
+        return result;
     }
 }
