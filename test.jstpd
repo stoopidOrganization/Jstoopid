@@ -1,6 +1,6 @@
 var a = "hi"
 
 out a
-
-var b = hi
-out b
+out 1.1
+out false 
+out "deez"

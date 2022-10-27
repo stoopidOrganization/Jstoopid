@@ -1,5 +1,8 @@
 package main;
 
+import exceptions.InvalidTypeException;
+import exceptions.VariableNotFoundException;
+
 /**
  * <p>
  *  Contains some Standart functions used all over the Project
@@ -39,5 +42,23 @@ public class lib {
         if (str.startsWith("\"") && str.endsWith("\"")) return true;
 
         return false;
+    }
+
+    public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
+        String result = null;
+
+        if (isNumber(value)) {
+            result = value;
+        } else if (isBool(value)) {
+            result = value;
+        } else if (isString(value)) {
+            result = value;
+        } else if (Main.varMan.isVariable(value)) {
+            result = Main.varMan.getVariableAsString(value);
+        } else {
+            throw new InvalidTypeException(value);
+        }
+
+        return result;
     }
 }

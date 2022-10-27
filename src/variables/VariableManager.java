@@ -3,6 +3,7 @@ package variables;
 import java.util.ArrayList;
 
 import exceptions.InvalidTypeException;
+import exceptions.VariableNotFoundException;
 import main.lib;
 
 /**
@@ -40,13 +41,15 @@ public class VariableManager {
      * @param value
      * @return type of value
      */
-    public String getType(String value) {
+    public String getType(String value) throws InvalidTypeException {
         if (lib.isBool(value)) {
             return "boolean";
         } else if (lib.isNumber(value)) {
             return "num";
-        } else {
+        } else if (lib.isString(value)) {
             return "str";
+        } else {
+            throw new InvalidTypeException(value);
         }
     }
 
@@ -64,7 +67,7 @@ public class VariableManager {
      * @param name of the Variable
      * @return type of Variable
      */
-    public String getVariableType(String name) {
+    public String getVariableType(String name) throws VariableNotFoundException {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return "bool";
         }
@@ -77,7 +80,7 @@ public class VariableManager {
             if(i.getName().equals(name)) return "string";
         }
 
-        return null;
+        throw new VariableNotFoundException(name);
     }
 
     /**
@@ -85,12 +88,12 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpBool getBoolVariable(String name) {
+    public stdpBool getBoolVariable(String name) throws VariableNotFoundException {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i;
         }
 
-        return null;
+        throw new VariableNotFoundException(name);
     }
 
     /**
@@ -98,12 +101,12 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpNum getNumVariable(String name) {
+    public stdpNum getNumVariable(String name) throws VariableNotFoundException {
         for (stdpNum i : nums) {
             if(i.getName().equals(name)) return i;
         }
 
-        return null;
+        throw new VariableNotFoundException(name);
     }
 
     /**
@@ -111,12 +114,12 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpStr getStrVariable(String name) {
+    public stdpStr getStrVariable(String name) throws VariableNotFoundException {
         for (stdpStr i : strs) {
             if(i.getName().equals(name)) return i;
         }
 
-        return null;
+        throw new VariableNotFoundException(name);
     }
 
     /**
@@ -145,7 +148,7 @@ public class VariableManager {
      * @param value of the Variable
      * @throws Exception
      */
-    public void newVariable(String name, String value) throws InvalidTypeException {
+    public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException {
         if (getStrVariable(name) != null || getNumVariable(name) != null || getBoolVariable(name) != null) return;
 
         if (lib.isBool(value)) {
@@ -164,7 +167,7 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable as String
      */
-    public String getVariableAsString(String name) {
+    public String getVariableAsString(String name) throws VariableNotFoundException {
         for (stdpBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
         }
@@ -177,7 +180,7 @@ public class VariableManager {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        return null;
+        throw new VariableNotFoundException(name);
     }
 
     /**
@@ -185,7 +188,7 @@ public class VariableManager {
      * @param name of the variable
      * @param value that the variable should be set to
      */
-    public void changeVariable(String name, String value) {
+    public void changeVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException {
         switch (getType(value)) {
             case "bool":
                 getBoolVariable(name).setValue(Boolean.parseBoolean(value));

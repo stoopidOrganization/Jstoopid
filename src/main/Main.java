@@ -66,7 +66,7 @@ public class Main {
                      */
                     case "var":
                         if (linepieces[2].equals("=")) {
-                            varMan.newVariable(linepieces[1], linepieces[3]);
+                            varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
                         }
                         break;
                     
@@ -75,7 +75,7 @@ public class Main {
                      * out {value}
                      */
                     case "out":
-                        System.out.println(varMan.getVariableAsString(linepieces[1]).replaceAll("\"", ""));
+                        System.out.println(lib.getValue(linepieces[1]).replaceAll("\"", ""));
                         break;
                     
                     /**
