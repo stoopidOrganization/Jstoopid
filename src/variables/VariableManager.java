@@ -40,13 +40,15 @@ public class VariableManager {
      * @param value
      * @return type of value
      */
-    public String getType(String value) {
+    public String getType(String value) throws InvalidTypeException {
         if (lib.isBool(value)) {
             return "boolean";
         } else if (lib.isNumber(value)) {
             return "num";
-        } else {
+        } else if (lib.isString(value)) {
             return "str";
+        } else {
+            throw new InvalidTypeException(value);
         }
     }
 
@@ -185,7 +187,7 @@ public class VariableManager {
      * @param name of the variable
      * @param value that the variable should be set to
      */
-    public void changeVariable(String name, String value) {
+    public void changeVariable(String name, String value) throws InvalidTypeException {
         switch (getType(value)) {
             case "bool":
                 getBoolVariable(name).setValue(Boolean.parseBoolean(value));

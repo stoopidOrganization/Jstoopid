@@ -1,5 +1,7 @@
 package main;
 
+import exceptions.InvalidTypeException;
+
 /**
  * <p>
  *  Contains some Standart functions used all over the Project
@@ -41,15 +43,17 @@ public class lib {
         return false;
     }
 
-    public static String getValue(String value) {
+    public static String getValue(String value) throws InvalidTypeException {
         String result = null;
 
         if (isNumber(value)) {
             // TODO implement number handling
         } else if (isBool(value)) {
             result = value;
-        } else {
+        } else if (isString(value)) {
             result = value;
+        } else {
+            throw new InvalidTypeException(value);
         }
 
         return result;
