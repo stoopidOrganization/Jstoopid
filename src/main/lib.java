@@ -13,16 +13,12 @@ public class lib {
      * @return if string is a number
      */
     public static boolean isNumber(String str) {
-        boolean isNumber;
-
         try {
             Double.parseDouble(str);
-            isNumber = true;
+            return true;
         } catch (NumberFormatException e) {
-            isNumber = false;
+            return false;
         }
-
-        return isNumber;
     }
 
     /**
@@ -30,10 +26,14 @@ public class lib {
      * @return if string is a boolean
      */
     public static boolean isBool(String str) {
-        boolean isBool = false;
-
-        if(str == "true" || str == "false") isBool = true;
+        if(str == "true" || str == "false") return true;;
         
-        return isBool;
+        return false;
+    }
+
+    public static boolean isString(String str) {
+        if (str.startsWith("\"") && str.endsWith("\"")) return true;
+
+        return false;
     }
 }
