@@ -1,10 +1,6 @@
-var a = 1.1
-var b = true
+var a = "hi"
 
 out a
+
+var b = hi
 out b
-
-a = 2
-b = false
-
-goto 3
