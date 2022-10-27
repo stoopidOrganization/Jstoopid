@@ -1,21 +1,24 @@
 package variables;
 
 /**
- * Variable of type String,
+ * <p>
+ * Variable of type Number
+ * <br><br>
  * Child of Variable
+ * </p>
  */
-public class vString extends Variable {
+public class stdpNum extends Variable {
     /**
      * Value of the Variable
      */
-    private String value;
+    private double value;
     
     /**
-     * Initializes a new Variable of the type String
+     * Initializes a new Variable of the type Number
      * @param name of the Variable
      * @param value of the Variable
      */
-    public vString(String name, String value) {
+    public stdpNum(String name, double value) {
         super(name);
         this.value = value;
     }
@@ -23,7 +26,7 @@ public class vString extends Variable {
     /**
      * @return Value of the Variable
      */
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -31,7 +34,7 @@ public class vString extends Variable {
      * Sets a new Value for the Variable
      * @param value of the Variable
      */
-    public void setValue(String value) {
+    public void setValue(double value) {
         this.value = value;
     }
     
