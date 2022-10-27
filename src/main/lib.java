@@ -31,6 +31,10 @@ public class lib {
         return false;
     }
 
+    /**
+     * @param str string to check
+     * @return if string is a string
+     */
     public static boolean isString(String str) {
         if (str.startsWith("\"") && str.endsWith("\"")) return true;
 
