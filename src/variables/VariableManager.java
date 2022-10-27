@@ -2,6 +2,7 @@ package variables;
 
 import java.util.ArrayList;
 
+import exceptions.InvalidTypeException;
 import main.lib;
 
 /**
@@ -145,7 +146,7 @@ public class VariableManager {
      * @param value of the Variable
      * @throws Exception
      */
-    public void newVariable(String name, String value) throws Exception {
+    public void newVariable(String name, String value) throws InvalidTypeException {
         if (getStrVariable(name) != null || getNumVariable(name) != null || getBoolVariable(name) != null) return;
 
         if (lib.isBool(value)) {
@@ -155,7 +156,7 @@ public class VariableManager {
         } else if (lib.isString(value)) {
             this.strs.add(new stdpStr(name, value));
         } else {
-            throw new Exception();
+            throw new InvalidTypeException(value);
         }
     }
 
