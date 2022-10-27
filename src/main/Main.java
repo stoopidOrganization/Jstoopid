@@ -24,7 +24,7 @@ public class Main {
      */
     public static variables.VariableManager varMan;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         varMan = new VariableManager();
         lines = new ArrayList<>();
 
@@ -72,7 +72,7 @@ public class Main {
                  * out {value}
                  */
                 case "out":
-                    System.out.println(varMan.getVariableAsString(linepieces[1]));
+                    System.out.println(varMan.getVariableAsString(linepieces[1]).replaceAll("\"", ""));
                     break;
                 
                 /**

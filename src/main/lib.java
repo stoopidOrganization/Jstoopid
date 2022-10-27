@@ -26,7 +26,7 @@ public class lib {
      * @return if string is a boolean
      */
     public static boolean isBool(String str) {
-        if(str == "true" || str == "false") return true;;
+        if(str.equals("true") || str.equals("false")) return true;;
         
         return false;
     }

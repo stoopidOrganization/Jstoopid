@@ -143,16 +143,19 @@ public class VariableManager {
      * Creates a new Variable
      * @param name of the Variable
      * @param value of the Variable
+     * @throws Exception
      */
-    public void newVariable(String name, String value) {
+    public void newVariable(String name, String value) throws Exception {
         if (getStrVariable(name) != null || getNumVariable(name) != null || getBoolVariable(name) != null) return;
 
         if (lib.isBool(value)) {
             this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
         } else if (lib.isNumber(value)) {
             this.nums.add(new stdpNum(name, Double.parseDouble(value)));
-        } else {
+        } else if (lib.isString(value)) {
             this.strs.add(new stdpStr(name, value));
+        } else {
+            throw new Exception();
         }
     }
 
