@@ -75,7 +75,11 @@ public class stdpMath {
         }
     }
 
+    /**
+     * @param operator
+     * @return if input is an operator
+     */
     public static boolean isOperator(String operator) {
-
+        return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/") || operator.equals("%") || operator.equals("^");
     }
 }
