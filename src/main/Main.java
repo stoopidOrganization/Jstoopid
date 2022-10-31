@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.InvalidKeywordException;
+import exceptions.VariableNotFoundException;
 import variables.VariableManager;
 
 /**
@@ -47,9 +49,7 @@ public class Main {
         }
 
         // cache the code
-        while (reader.hasNextLine()) {
-            lines.add(reader.nextLine());
-        }
+        while (reader.hasNextLine()) lines.add(reader.nextLine());
 
         reader.close();
         
@@ -65,9 +65,7 @@ public class Main {
                      * var {name} = {value}
                      */
                     case "var":
-                        if (linepieces[2].equals("=")) {
-                            varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
-                        }
+                        if (linepieces[2].equals("=")) varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
                         break;
                     
                     /**
@@ -92,13 +90,18 @@ public class Main {
                          * Syntax:
                          * {name} = {value}
                          */
-                        if(varMan.isVariable(linepieces[0]) && linepieces[1].equals("=")) {
-                            varMan.changeVariable(linepieces[0], linepieces[2]);
+                        if (linepieces.length > 1 && linepieces[1].equals("=")) {
+                            if (varMan.isVariable(linepieces[0])) varMan.changeVariable(linepieces[0], linepieces[2]);
+                            else throw new VariableNotFoundException(linepieces[0]);
                         }
-                        break;
+
+                        if (linepieces[0].equals("")) break;
+                        else if (linepieces[0].startsWith("#")) break;
+
+                        throw new InvalidKeywordException(linepieces[0]);
                 }
             } catch (Exception e) {
-                System.out.println("Your Script crashed in line " + i + ":\n\t" + e);
+                System.err.println("Your Script crashed in line " + i + ":\n\t" + e);
                 return;
             }
         }

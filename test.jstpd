@@ -4,3 +4,5 @@ out a
 out 1.1
 out false 
 out "deez"
+
+# test keyword that doesnt exist
