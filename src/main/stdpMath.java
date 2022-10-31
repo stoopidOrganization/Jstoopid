@@ -11,7 +11,7 @@ public class stdpMath {
     private Stack<String> operator;
     private Queue<String> calcQueue;
 
-    public stdpMath(String calculation) {
+    public stdpMath(String equasion) {
         this.equasion = equasion.replaceAll(" ", "");
         this.calcList = new ArrayList<>();
         this.operator = new Stack<>();
@@ -22,6 +22,39 @@ public class stdpMath {
 
     public double solve() {
         double result = 0.0;
+
+        for (int i = 0; i < calcList.size(); i++) {
+            String current = calcList.get(i);
+
+            System.out.println(current);
+
+            if (Utils.isNumber(current)) {
+                this.calcQueue.add(current);
+            } else if (this.operator.isEmpty()) {
+                this.operator.add(current);
+            } else if (calcOperatorScore(current) >= calcOperatorScore(this.operator.peek())) {
+                this.operator.add(current);
+            } else {
+                while (!this.operator.isEmpty()) {
+                    if (calcOperatorScore(current) < calcOperatorScore(this.operator.peek())) {
+                        this.calcQueue.add(this.operator.peek());
+                        this.operator.pop();
+                    } else break;
+                }
+
+                this.operator.add(current);
+            }
+        }
+
+        while (!this.operator.isEmpty()) {
+            this.calcQueue.add(this.operator.peek());
+            this.operator.pop();
+        }
+
+        System.out.println("\n\nqueueuueueuueue");
+        for (String str : calcQueue) {
+            System.out.println(str);
+        }
 
         return result;
     }
