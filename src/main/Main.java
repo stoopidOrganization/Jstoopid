@@ -30,7 +30,7 @@ public class Main {
         varMan = new VariableManager();
         lines = new ArrayList<>();
 
-        new stdpMath("10 + 10 * 10 - 10").solveEquasion();
+        stdpMath.solveEquasion("10 + 10 * 10 - 10");
 
         // Get Filename from arguments
         try {

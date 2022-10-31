@@ -6,17 +6,10 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class stdpMath {
-    private ArrayList<String> equasion;
-
-    public stdpMath(String equasion) {
-        this.equasion = new ArrayList<>();
-        splitEquasion(equasion.replaceAll(" ", ""));
-    }
-
-    public double solveEquasion() {
+    public static double solveEquasion(String equasion) {
         double result = 0.0;
 
-        Queue<String> equasionInRPN = convertToRPN();
+        Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion.replaceAll(" ", "")));
 
         for (String s : equasionInRPN) {
             System.out.print(s + " ");
@@ -29,7 +22,7 @@ public class stdpMath {
         return result;
     }
 
-    private Queue<String> convertToRPN() {
+    private static Queue<String> convertToRPN(ArrayList<String> equasion) {
         Stack<String> operators = new Stack<>();
         Queue<String> equasionInRPN = new LinkedList<>();;
 
@@ -62,21 +55,24 @@ public class stdpMath {
         return equasionInRPN;
     }
     
-    private void splitEquasion(String equasion) {
+    private static ArrayList<String> splitEquasion(String equasion) {
         String s = "";
         char[] list = equasion.toCharArray();
+        ArrayList<String> equasionAsList = new ArrayList<>();
 
         for (int i = 0; i < list.length; i++) {
             if (Utils.isNumber(String.valueOf(list[i]))) {
                 s += list[i];
             } else {
-                this.equasion.add(s);
-                this.equasion.add(String.valueOf(list[i]));
+                equasionAsList.add(s);
+                equasionAsList.add(String.valueOf(list[i]));
                 s = "";
             }
         }
 
-        this.equasion.add(s);
+        equasionAsList.add(s);
+
+        return equasionAsList;
     }
 
     /**
