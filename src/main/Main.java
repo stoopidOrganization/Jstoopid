@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.VariableNotFoundException;
 import variables.VariableManager;
 
 /**
@@ -92,8 +93,9 @@ public class Main {
                          * Syntax:
                          * {name} = {value}
                          */
-                        if(varMan.isVariable(linepieces[0]) && linepieces[1].equals("=")) {
-                            varMan.changeVariable(linepieces[0], linepieces[2]);
+                        if (linepieces[1].equals("=")) {
+                            if (varMan.isVariable(linepieces[0])) varMan.changeVariable(linepieces[0], linepieces[2]);
+                            else throw new VariableNotFoundException(linepieces[0]);
                         }
                         break;
                 }

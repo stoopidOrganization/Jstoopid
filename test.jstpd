@@ -1,6 +1,4 @@
-var a = "hi"
-
-a = 1
+a = "hi"
 
 out a
 out 1.1
