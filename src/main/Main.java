@@ -49,9 +49,7 @@ public class Main {
         }
 
         // cache the code
-        while (reader.hasNextLine()) {
-            lines.add(reader.nextLine());
-        }
+        while (reader.hasNextLine()) lines.add(reader.nextLine());
 
         reader.close();
         
@@ -67,9 +65,7 @@ public class Main {
                      * var {name} = {value}
                      */
                     case "var":
-                        if (linepieces[2].equals("=")) {
-                            varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
-                        }
+                        if (linepieces[2].equals("=")) varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
                         break;
                     
                     /**

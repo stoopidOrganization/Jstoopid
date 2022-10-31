@@ -47,17 +47,11 @@ public class lib {
     public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
         String result = null;
 
-        if (isNumber(value)) {
-            result = value;
-        } else if (isBool(value)) {
-            result = value;
-        } else if (isString(value)) {
-            result = value;
-        } else if (Main.varMan.isVariable(value)) {
-            result = Main.varMan.getVariableAsString(value);
-        } else {
-            throw new InvalidTypeException(value);
-        }
+        if (isNumber(value)) result = value;
+        else if (isBool(value)) result = value;
+        else if (isString(value)) result = value;
+        else if (Main.varMan.isVariable(value)) result = Main.varMan.getVariableAsString(value);
+        else throw new InvalidTypeException(value);
 
         return result;
     }
