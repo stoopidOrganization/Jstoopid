@@ -10,7 +10,7 @@ import exceptions.VariableNotFoundException;
  *  Methods here should be static
  *  </p>
  */
-public class lib {
+public class Utils {
     /**
      * @param str string to check
      * @return if string is a number

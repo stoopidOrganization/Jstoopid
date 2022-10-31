@@ -31,7 +31,7 @@ public class stdpMath {
         char[] list = this.calculation.toCharArray();
 
         for (int i = 0; i < list.length; i++) {
-            if (lib.isNumber(String.valueOf(list[i]))) {
+            if (Utils.isNumber(String.valueOf(list[i]))) {
                 s += list[i];
             } else {
                 this.calcList.add(s);
