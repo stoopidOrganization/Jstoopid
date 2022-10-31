@@ -149,7 +149,7 @@ public class VariableManager {
      * @throws Exception
      */
     public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException {
-        if (getStrVariable(name) != null || getNumVariable(name) != null || getBoolVariable(name) != null) return;
+        if(isVariable(name)) return;
 
         if (lib.isBool(value)) {
             this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));

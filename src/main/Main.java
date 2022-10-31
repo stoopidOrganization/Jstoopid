@@ -98,7 +98,7 @@ public class Main {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Your Script crashed in line " + i + ":\n\t" + e);
+                System.err.println("Your Script crashed in line " + i + ":\n\t" + e);
                 return;
             }
         }
