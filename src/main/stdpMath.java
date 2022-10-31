@@ -6,74 +6,76 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class stdpMath {
-    private String equasion;
-    private ArrayList<String> calcList;
-    private Stack<String> operator;
-    private Queue<String> calcQueue;
+    private ArrayList<String> equasionAsList;
 
     public stdpMath(String equasion) {
-        this.equasion = equasion.replaceAll(" ", "");
-        this.calcList = new ArrayList<>();
-        this.operator = new Stack<>();
-        this.calcQueue = new LinkedList<>();
-
-        convert();
+        this.equasionAsList = new ArrayList<>();
+        splitEquasion(equasion.replaceAll(" ", ""));
     }
 
-    public double solve() {
+    public double solveEquasion() {
         double result = 0.0;
 
-        for (int i = 0; i < calcList.size(); i++) {
-            String current = calcList.get(i);
+        // TODO implement solver
+
+        return result;
+    }
+
+    private Queue<String> convertToRPN() {
+        Stack<String> operators = new Stack<>();
+        Queue<String> equasionInRPN = new LinkedList<>();;
+
+        for (int i = 0; i < equasionAsList.size(); i++) {
+            String current = equasionAsList.get(i);
 
             System.out.println(current);
 
             if (Utils.isNumber(current)) {
-                this.calcQueue.add(current);
-            } else if (this.operator.isEmpty()) {
-                this.operator.add(current);
-            } else if (calcOperatorScore(current) >= calcOperatorScore(this.operator.peek())) {
-                this.operator.add(current);
+                equasionInRPN.add(current);
+            } else if (operators.isEmpty()) {
+                operators.add(current);
+            } else if (calcOperatorScore(current) >= calcOperatorScore(operators.peek())) {
+                operators.add(current);
             } else {
-                while (!this.operator.isEmpty()) {
-                    if (calcOperatorScore(current) < calcOperatorScore(this.operator.peek())) {
-                        this.calcQueue.add(this.operator.peek());
-                        this.operator.pop();
+                while (!operators.isEmpty()) {
+                    if (calcOperatorScore(current) < calcOperatorScore(operators.peek())) {
+                        equasionInRPN.add(operators.peek());
+                        operators.pop();
                     } else break;
                 }
 
-                this.operator.add(current);
+                operators.add(current);
             }
         }
 
-        while (!this.operator.isEmpty()) {
-            this.calcQueue.add(this.operator.peek());
-            this.operator.pop();
+        while (!operators.isEmpty()) {
+            equasionInRPN.add(operators.peek());
+            operators.pop();
         }
 
         System.out.println("\n\nqueueuueueuueue");
-        for (String str : calcQueue) {
+        for (String str : equasionInRPN) {
             System.out.println(str);
         }
 
-        return result;
+        return equasionInRPN;
     }
     
-    private void convert() {
+    private void splitEquasion(String equasion) {
         String s = "";
-        char[] list = this.equasion.toCharArray();
+        char[] list = equasion.toCharArray();
 
         for (int i = 0; i < list.length; i++) {
             if (Utils.isNumber(String.valueOf(list[i]))) {
                 s += list[i];
             } else {
-                this.calcList.add(s);
-                this.calcList.add(String.valueOf(list[i]));
+                this.equasionAsList.add(s);
+                this.equasionAsList.add(String.valueOf(list[i]));
                 s = "";
             }
         }
 
-        this.calcList.add(s);
+        this.equasionAsList.add(s);
     }
 
     /**
