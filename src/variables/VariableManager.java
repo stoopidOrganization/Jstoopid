@@ -3,6 +3,7 @@ package variables;
 import java.util.ArrayList;
 
 import exceptions.InvalidTypeException;
+import exceptions.VariableAlreadyExistsException;
 import exceptions.VariableNotFoundException;
 import main.lib;
 
@@ -148,8 +149,8 @@ public class VariableManager {
      * @param value of the Variable
      * @throws Exception
      */
-    public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException {
-        if(isVariable(name)) return;
+    public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException, VariableAlreadyExistsException {
+        if(isVariable(name)) throw new VariableAlreadyExistsException(name);
 
         if (lib.isBool(value)) {
             this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
