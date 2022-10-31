@@ -28,7 +28,7 @@ public class stdpMath {
     
     private void convert() {
         String s = "";
-        char[] list = this.calculation.toCharArray();
+        char[] list = this.equasion.toCharArray();
 
         for (int i = 0; i < list.length; i++) {
             if (Utils.isNumber(String.valueOf(list[i]))) {
