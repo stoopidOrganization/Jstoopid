@@ -6,13 +6,13 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class stdpMath {
-    private String calculation;
+    private String equasion;
     private ArrayList<String> calcList;
     private Stack<String> operator;
     private Queue<String> calcQueue;
 
     public stdpMath(String calculation) {
-        this.calculation = calculation.replaceAll(" ", "");
+        this.equasion = equasion.replaceAll(" ", "");
         this.calcList = new ArrayList<>();
         this.operator = new Stack<>();
         this.calcQueue = new LinkedList<>();
@@ -73,5 +73,9 @@ public class stdpMath {
             default:
                 return -1;
         }
+    }
+
+    public static boolean isOperator(String operator) {
+
     }
 }
