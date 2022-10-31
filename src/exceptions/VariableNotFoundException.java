@@ -8,6 +8,6 @@ public class VariableNotFoundException extends Exception {
      * @param name of the Variable
      */
     public VariableNotFoundException(String name) {
-        super("Variable with name \'" + name + "\' can not be found");
+        super("Variable with name \'" + name + "\' can't be found.");
     }
 }

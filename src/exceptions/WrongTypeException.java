@@ -11,6 +11,6 @@ public class WrongTypeException extends Exception {
      * @param varType name of the variable
      */
     public WrongTypeException(String value, String varName, String valueType, String varType) {
-        super("Variable \'" + varName + "\' is of type \'" + varType + "\' but the given value \'" + value + "\' has the type \'" + valueType + "\'!");
+        super("Variable \'" + varName + "\' is of type \'" + varType + "\' but the given value \'" + value + "\' has the type \'" + valueType + "\'.");
     }
 }
