@@ -64,6 +64,16 @@ public class stdpMath {
             if (Utils.isNumber(String.valueOf(list[i])) || list[i] == '.') {
                 s += list[i];
             } else {
+                if (list[i] == '-') {
+                    if (i == 0) {
+                        s += list[i];
+                        continue;
+                    } else if (isOperator(String.valueOf(list[i - 1]))) {
+                        s += list[i];
+                        continue;
+                    }
+                }
+
                 equasionAsList.add(s);
                 equasionAsList.add(String.valueOf(list[i]));
                 s = "";
