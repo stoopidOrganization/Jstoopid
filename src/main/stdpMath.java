@@ -6,15 +6,23 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class stdpMath {
-    private ArrayList<String> equasionAsList;
+    private ArrayList<String> equasion;
 
     public stdpMath(String equasion) {
-        this.equasionAsList = new ArrayList<>();
+        this.equasion = new ArrayList<>();
         splitEquasion(equasion.replaceAll(" ", ""));
     }
 
     public double solveEquasion() {
         double result = 0.0;
+
+        Queue<String> equasionInRPN = convertToRPN();
+
+        for (String s : equasionInRPN) {
+            System.out.print(s + " ");
+        }
+
+        System.out.println();
 
         // TODO implement solver
 
@@ -25,10 +33,8 @@ public class stdpMath {
         Stack<String> operators = new Stack<>();
         Queue<String> equasionInRPN = new LinkedList<>();;
 
-        for (int i = 0; i < equasionAsList.size(); i++) {
-            String current = equasionAsList.get(i);
-
-            System.out.println(current);
+        for (int i = 0; i < equasion.size(); i++) {
+            String current = equasion.get(i);
 
             if (Utils.isNumber(current)) {
                 equasionInRPN.add(current);
@@ -53,11 +59,6 @@ public class stdpMath {
             operators.pop();
         }
 
-        System.out.println("\n\nqueueuueueuueue");
-        for (String str : equasionInRPN) {
-            System.out.println(str);
-        }
-
         return equasionInRPN;
     }
     
@@ -69,13 +70,13 @@ public class stdpMath {
             if (Utils.isNumber(String.valueOf(list[i]))) {
                 s += list[i];
             } else {
-                this.equasionAsList.add(s);
-                this.equasionAsList.add(String.valueOf(list[i]));
+                this.equasion.add(s);
+                this.equasion.add(String.valueOf(list[i]));
                 s = "";
             }
         }
 
-        this.equasionAsList.add(s);
+        this.equasion.add(s);
     }
 
     /**
