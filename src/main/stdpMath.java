@@ -9,7 +9,7 @@ public class stdpMath {
     public static double solveEquasion(String equasion) {
         double result = 0.0;
 
-        Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion.replaceAll(" ", "")));
+        Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
 
         for (String s : equasionInRPN) {
             System.out.print(s + " ");
@@ -57,11 +57,11 @@ public class stdpMath {
     
     private static ArrayList<String> splitEquasion(String equasion) {
         String s = "";
-        char[] list = equasion.toCharArray();
+        char[] list = equasion.replaceAll(" ", "").toCharArray();
         ArrayList<String> equasionAsList = new ArrayList<>();
 
         for (int i = 0; i < list.length; i++) {
-            if (Utils.isNumber(String.valueOf(list[i]))) {
+            if (Utils.isNumber(String.valueOf(list[i])) || list[i] == '.') {
                 s += list[i];
             } else {
                 equasionAsList.add(s);
