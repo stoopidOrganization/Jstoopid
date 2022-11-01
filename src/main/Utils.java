@@ -28,10 +28,7 @@ public class Utils {
         char[] list = str.toCharArray();
         
         for (char c : list) {
-            if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^' || c == '(' || c == ')' || c == '.')) {
-                return false;
-            }
-            
+            if (!(isNumber(String.valueOf(c)) || stdpMath.isOperator(String.valueOf(c)) || c == '(' || c == ')' || c == '.')) return false;
         }
 
         return true;
