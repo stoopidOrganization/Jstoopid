@@ -45,22 +45,55 @@ public class Utils {
         return false;
     }
 
-    public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
+    /**
+     * Gets the value of a given input
+     * <br><br>
+     * Solves Equasions, resolves variables
+     * @param input
+     * @return solved value
+     * @throws InvalidTypeException
+     * @throws VariableNotFoundException
+     * @throws InvalidOperatorException
+     */
+    public static String getValue(String input) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
         String result = null;
 
-        if (stdpMath.isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));
-        else if (isBool(value)) result = value;
-        else if (isString(value)) result = value;
-        else if (Main.varMan.isVariable(value)) result = Main.varMan.getVariableAsString(value);
-        else throw new InvalidTypeException(value);
+        if (stdpMath.isEquasion(input)) result = String.valueOf(stdpMath.solveEquasion(input));
+        else if (isBool(input)) result = input;
+        else if (isString(input)) result = input;
+        else if (Main.varMan.isVariable(input)) result = Main.varMan.getVariableAsString(input);
+        else throw new InvalidTypeException(input);
 
         return result;
     }
 
+    /**
+     * Combines an Array of Strings into one String
+     * @param args full array of strings
+     * @param start of the combination
+     * @param end of the combination
+     * @return combined array as String
+     */
     public static String combineArgs(String[] args, int start, int end) {
         String result = "";
 
         for (int i = start; i < args.length || i < end; i++) {
+            result += args[i];
+        }
+
+        return result;
+    }
+
+    /**
+     * Combines an Array of Strings into one String
+     * @param args full array of strings
+     * @param start of the combination
+     * @return combined array as String
+     */
+    public static String combineArgs(String[] args, int start) {
+        String result = "";
+
+        for (int i = start; i < args.length; i++) {
             result += args[i];
         }
 
