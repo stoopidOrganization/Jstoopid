@@ -68,4 +68,14 @@ public class Utils {
 
         return result;
     }
+
+    public static String combineArgs(String[] args) {
+        String result = "";
+
+        for (String str : args) {
+            result += str;
+        }
+
+        return result;
+    }
 }
