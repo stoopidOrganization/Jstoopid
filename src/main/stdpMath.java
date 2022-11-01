@@ -12,7 +12,7 @@ public class stdpMath {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
 
         for (String s : equasionInRPN) {
-            System.out.print(s + " ");
+            System.out.print(s + "");
         }
 
         System.out.println();
@@ -23,33 +23,47 @@ public class stdpMath {
     }
 
     private static Queue<String> convertToRPN(ArrayList<String> equasion) {
-        Stack<String> operators = new Stack<>();
-        Queue<String> equasionInRPN = new LinkedList<>();;
+        ArrayList<Stack<String>> operators = new ArrayList<>();
+        Queue<String> equasionInRPN = new LinkedList<>();
+
+        operators.add(new Stack<>());
+        int currentStack = 0;
 
         for (int i = 0; i < equasion.size(); i++) {
             String current = equasion.get(i);
 
             if (Utils.isNumber(current)) {
                 equasionInRPN.add(current);
-            } else if (operators.isEmpty()) {
-                operators.add(current);
-            } else if (calcOperatorScore(current) >= calcOperatorScore(operators.peek())) {
-                operators.add(current);
+            } else if (isOperator(current) && operators.get(currentStack).isEmpty()) {
+                operators.get(currentStack).add(current);
+            } else if (isOperator(current) && calcOperatorScore(current) >= calcOperatorScore(operators.get(currentStack).peek())) {
+                operators.get(currentStack).add(current);
+            } else if (current.contains("(")) {
+                currentStack++;
+                operators.add(new Stack<>());
+            } else if (current.contains(")")) {
+                while (!operators.get(currentStack).isEmpty()) {
+                    equasionInRPN.add(operators.get(currentStack).peek());
+                    operators.get(currentStack).pop();
+                }
+
+                operators.remove(currentStack);
+                currentStack--;
             } else {
-                while (!operators.isEmpty()) {
-                    if (calcOperatorScore(current) < calcOperatorScore(operators.peek())) {
-                        equasionInRPN.add(operators.peek());
-                        operators.pop();
+                while (!operators.get(currentStack).isEmpty()) {
+                    if (calcOperatorScore(current) < calcOperatorScore(operators.get(currentStack).peek())) {
+                        equasionInRPN.add(operators.get(currentStack).peek());
+                        operators.get(currentStack).pop();
                     } else break;
                 }
 
-                operators.add(current);
+                operators.get(currentStack).add(current);
             }
         }
 
-        while (!operators.isEmpty()) {
-            equasionInRPN.add(operators.peek());
-            operators.pop();
+        while (!operators.get(currentStack).isEmpty()) {
+            equasionInRPN.add(operators.get(currentStack).peek());
+            operators.get(currentStack).pop();
         }
 
         return equasionInRPN;
@@ -66,25 +80,34 @@ public class stdpMath {
             } else {
                 if (list[i] == '-') {
                     if (i == 0) {
-                        s += list[i];
+                        s += list[i] +'\0';
                         continue;
                     } else if (isOperator(String.valueOf(list[i - 1]))) {
-                        s += list[i];
+                        s += list[i] +'\0';
                         continue;
                     }
                 }
 
-                equasionAsList.add(s);
-                equasionAsList.add(String.valueOf(list[i]));
-                s = "";
+                if (s != "") {
+                    equasionAsList.add(s);
+                    s = "";
+                }
+
+                if (isOperator(String.valueOf(list[i]))) {
+                    equasionAsList.add(String.valueOf(list[i]));
+                } else if (list[i] == '(') {
+                    equasionAsList.add("(");
+                } else if (list[i] == ')') {
+                    equasionAsList.add(")");
+                }
             }
         }
-
+        
         equasionAsList.add(s);
-
+        
         return equasionAsList;
     }
-
+    
     /**
      * Calculates a score based on the operater
      * <br><br>
