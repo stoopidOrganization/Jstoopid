@@ -10,7 +10,7 @@ import exceptions.VariableNotFoundException;
  *  Methods here should be static
  *  </p>
  */
-public class lib {
+public class Utils {
     /**
      * @param str string to check
      * @return if string is a number
@@ -22,6 +22,19 @@ public class lib {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean isEquasion(String str) {
+        char[] list = str.toCharArray();
+        
+        for (char c : list) {
+            if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^' || c == '(' || c == ')' || c == '.')) {
+                return false;
+            }
+            
+        }
+
+        return true;
     }
 
     /**
@@ -47,16 +60,20 @@ public class lib {
     public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
         String result = null;
 
-        if (isNumber(value)) {
-            result = value;
-        } else if (isBool(value)) {
-            result = value;
-        } else if (isString(value)) {
-            result = value;
-        } else if (Main.varMan.isVariable(value)) {
-            result = Main.varMan.getVariableAsString(value);
-        } else {
-            throw new InvalidTypeException(value);
+        if (isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));
+        else if (isBool(value)) result = value;
+        else if (isString(value)) result = value;
+        else if (Main.varMan.isVariable(value)) result = Main.varMan.getVariableAsString(value);
+        else throw new InvalidTypeException(value);
+
+        return result;
+    }
+
+    public static String combineArgs(String[] args, int start, int end) {
+        String result = "";
+
+        for (int i = start; i < args.length || i < end; i++) {
+            result += args[i];
         }
 
         return result;
