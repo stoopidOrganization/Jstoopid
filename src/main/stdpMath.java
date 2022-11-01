@@ -7,19 +7,34 @@ import java.util.Stack;
 
 public class stdpMath {
     public static double solveEquasion(String equasion) {
-        double result = 0.0;
-
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
 
         for (String s : equasionInRPN) {
-            System.out.print(s + "");
+            System.out.print(s + " ");
         }
 
         System.out.println();
 
-        // TODO implement solver
+        Stack<String> storage = new Stack<>();
 
-        return result;
+        while (!equasionInRPN.isEmpty()) {
+            String current = equasionInRPN.peek();
+            equasionInRPN.remove();
+
+            if (isOperator(current)) {
+                String num2 = storage.peek();
+                storage.pop();
+                String num1 = storage.peek();
+                storage.pop();
+
+                storage.add(solveSimpleEquasion(num1, num2, current));
+                
+            } else {
+                storage.push(current);
+            }
+        }
+
+        return Double.parseDouble(storage.peek());
     }
 
     private static Queue<String> convertToRPN(ArrayList<String> equasion) {
@@ -106,6 +121,31 @@ public class stdpMath {
         equasionAsList.add(s);
         
         return equasionAsList;
+    }
+
+    private static String solveSimpleEquasion(String num1, String num2, String operator) {
+        switch (operator) {
+            case "+":
+                return String.valueOf(Double.parseDouble(num1) + Double.parseDouble(num2));
+            
+            case "-":
+                return String.valueOf(Double.parseDouble(num1) - Double.parseDouble(num2));
+
+            case "*":
+                return String.valueOf(Double.parseDouble(num1) * Double.parseDouble(num2));
+
+            case "/":
+                return String.valueOf(Double.parseDouble(num1) / Double.parseDouble(num2));
+
+            case "%":
+                return String.valueOf(Double.parseDouble(num1) % Double.parseDouble(num2));
+
+            case "^":
+                return String.valueOf(Math.pow(Double.parseDouble(num1), Double.parseDouble(num2)));
+        
+            default:
+                return "";
+        }
     }
     
     /**
