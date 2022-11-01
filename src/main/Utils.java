@@ -60,7 +60,7 @@ public class Utils {
     public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
         String result = null;
 
-        if (isEquasion(value)) result = value;
+        if (isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));
         else if (isBool(value)) result = value;
         else if (isString(value)) result = value;
         else if (Main.varMan.isVariable(value)) result = Main.varMan.getVariableAsString(value);
