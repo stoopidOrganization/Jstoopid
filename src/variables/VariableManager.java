@@ -6,7 +6,7 @@ import exceptions.InvalidTypeException;
 import exceptions.VariableAlreadyExistsException;
 import exceptions.VariableNotFoundException;
 import exceptions.WrongTypeException;
-import main.lib;
+import main.Utils;
 
 /**
  * <p>
@@ -44,11 +44,11 @@ public class VariableManager {
      * @return type of value
      */
     public String getType(String value) throws InvalidTypeException {
-        if (lib.isBool(value)) {
+        if (Utils.isBool(value)) {
             return "boolean";
-        } else if (lib.isNumber(value)) {
+        } else if (Utils.isNumber(value)) {
             return "num";
-        } else if (lib.isString(value)) {
+        } else if (Utils.isString(value)) {
             return "str";
         } else {
             throw new InvalidTypeException(value);
@@ -153,11 +153,11 @@ public class VariableManager {
     public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException, VariableAlreadyExistsException {
         if(isVariable(name)) throw new VariableAlreadyExistsException(name);
 
-        if (lib.isBool(value)) {
+        if (Utils.isBool(value)) {
             this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
-        } else if (lib.isNumber(value)) {
+        } else if (Utils.isNumber(value)) {
             this.nums.add(new stdpNum(name, Double.parseDouble(value)));
-        } else if (lib.isString(value)) {
+        } else if (Utils.isString(value)) {
             this.strs.add(new stdpStr(name, value));
         } else {
             throw new InvalidTypeException(value);

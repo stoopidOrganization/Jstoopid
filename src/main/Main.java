@@ -65,7 +65,7 @@ public class Main {
                      * var {name} = {value}
                      */
                     case "var":
-                        if (linepieces[2].equals("=")) varMan.newVariable(linepieces[1], lib.getValue(linepieces[3]));
+                        if (linepieces[2].equals("=")) varMan.newVariable(linepieces[1], Utils.getValue(Utils.combineArgs(linepieces, 3)));
                         break;
                     
                     /**
@@ -73,7 +73,7 @@ public class Main {
                      * out {value}
                      */
                     case "out":
-                        System.out.println(lib.getValue(linepieces[1]).replaceAll("\"", ""));
+                        System.out.println(Utils.getValue(Utils.combineArgs(linepieces, 1).replaceAll("\"", "")));
                         break;
                     
                     /**
@@ -91,13 +91,15 @@ public class Main {
                          * {name} = {value}
                          */
                         if (linepieces.length > 1 && linepieces[1].equals("=")) {
-                            if (varMan.isVariable(linepieces[0])) varMan.changeVariable(linepieces[0], linepieces[2]);
+                            if (varMan.isVariable(linepieces[0])) varMan.changeVariable(linepieces[0], Utils.getValue(Utils.combineArgs(linepieces, 2)));
                             else throw new VariableNotFoundException(linepieces[0]);
                         }
 
+                        // dont throw errors on empty lines and comments
                         if (linepieces[0].equals("")) break;
                         else if (linepieces[0].startsWith("#")) break;
 
+                        // throws an error when the keyword isnt recognize
                         throw new InvalidKeywordException(linepieces[0]);
                 }
             } catch (Exception e) {
