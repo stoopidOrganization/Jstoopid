@@ -1,5 +1,6 @@
 package main;
 
+import exceptions.InvalidOperatorException;
 import exceptions.InvalidTypeException;
 import exceptions.VariableNotFoundException;
 
@@ -54,7 +55,7 @@ public class Utils {
         return false;
     }
 
-    public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException {
+    public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
         String result = null;
 
         if (isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));

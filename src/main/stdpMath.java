@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+import exceptions.InvalidOperatorException;
+
 public class stdpMath {
-    public static double solveEquasion(String equasion) {
+    public static double solveEquasion(String equasion) throws InvalidOperatorException {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
 
@@ -30,7 +32,7 @@ public class stdpMath {
         return Double.parseDouble(storage.peek());
     }
 
-    private static Queue<String> convertToRPN(ArrayList<String> equasion) {
+    private static Queue<String> convertToRPN(ArrayList<String> equasion) throws InvalidOperatorException {
         ArrayList<Stack<String>> operators = new ArrayList<>();
         Queue<String> equasionInRPN = new LinkedList<>();
 
@@ -116,7 +118,7 @@ public class stdpMath {
         return equasionAsList;
     }
 
-    private static String solveSimpleEquasion(String num1, String num2, String operator) {
+    private static String solveSimpleEquasion(String num1, String num2, String operator) throws InvalidOperatorException {
         switch (operator) {
             case "+":
                 return String.valueOf(Double.parseDouble(num1) + Double.parseDouble(num2));
@@ -137,7 +139,7 @@ public class stdpMath {
                 return String.valueOf(Math.pow(Double.parseDouble(num1), Double.parseDouble(num2)));
         
             default:
-                return "";
+                throw new InvalidOperatorException(operator);
         }
     }
     
@@ -147,8 +149,9 @@ public class stdpMath {
      * higher = more important
      * @param operator
      * @return score
+     * @throws InvalidOperatorException
      */
-    public static int calcOperatorScore(String operator) {
+    public static int calcOperatorScore(String operator) throws InvalidOperatorException {
         switch (operator) {
             case "+":
                 return 0;
@@ -169,7 +172,7 @@ public class stdpMath {
                 return 5;
         
             default:
-                return -1;
+                throw new InvalidOperatorException(operator);
         }
     }
 
