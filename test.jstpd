@@ -1,7 +1,7 @@
 var a = "hi"
 
 out a
-out 1.1
+out 1.1 + 1.1
 out false 
 out "deez"
 
