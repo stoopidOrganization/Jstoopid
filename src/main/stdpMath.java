@@ -111,30 +111,40 @@ public class stdpMath {
         return equasionInRPN;
     }
     
+    /**
+     * Spilts the equasion into its parts
+     * @param equasion
+     * @return list of all parts in the equasion
+     */
     private static ArrayList<String> splitEquasion(String equasion) {
-        String s = "";
+        String cache = "";
+        // puts the equasion into a list of chars without spaceys
         char[] list = equasion.replaceAll(" ", "").toCharArray();
         ArrayList<String> equasionAsList = new ArrayList<>();
 
         for (int i = 0; i < list.length; i++) {
             if (Utils.isNumber(String.valueOf(list[i])) || list[i] == '.') {
-                s += list[i];
+                // if number add to cache
+                cache += list[i];
             } else {
+                // if operator is actually part of a negative number then add it to the cache
                 if (list[i] == '-') {
                     if (i == 0) {
-                        s += list[i] +'\0';
+                        cache += list[i];
                         continue;
                     } else if (isOperator(String.valueOf(list[i - 1]))) {
-                        s += list[i] +'\0';
+                        cache += list[i];
                         continue;
                     }
                 }
 
-                if (s != "") {
-                    equasionAsList.add(s);
-                    s = "";
+                // if the cache isnt empty and an operator is found, add it to the result
+                if (cache != "") {
+                    equasionAsList.add(cache);
+                    cache = "";
                 }
 
+                // add operators and brackets to the list
                 if (isOperator(String.valueOf(list[i]))) {
                     equasionAsList.add(String.valueOf(list[i]));
                 } else if (list[i] == '(') {
@@ -145,11 +155,19 @@ public class stdpMath {
             }
         }
         
-        equasionAsList.add(s);
+        equasionAsList.add(cache);
         
         return equasionAsList;
     }
 
+    /**
+     * solves a simple 2 number 1 operator equasion
+     * @param num1
+     * @param num2
+     * @param operator
+     * @return the solved equasion
+     * @throws InvalidOperatorException
+     */
     private static String solveSimpleEquasion(String num1, String num2, String operator) throws InvalidOperatorException {
         switch (operator) {
             case "+":
