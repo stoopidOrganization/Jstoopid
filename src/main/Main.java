@@ -30,8 +30,6 @@ public class Main {
         varMan = new VariableManager();
         lines = new ArrayList<>();
 
-        System.out.println(stdpMath.solveEquasion("(10 + (10 - 10)) * 10 - 10"));
-
         // Get Filename from arguments
         try {
             filename = args[0];
