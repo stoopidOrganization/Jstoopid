@@ -7,6 +7,9 @@ import java.util.Stack;
 
 import exceptions.InvalidOperatorException;
 
+/**
+ * Handles all math systems of the language
+ */
 public class stdpMath {
     /**
      * Solves the given equasion
