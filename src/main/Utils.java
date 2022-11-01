@@ -3,7 +3,6 @@ package main;
 import exceptions.InvalidOperatorException;
 import exceptions.InvalidTypeException;
 import exceptions.VariableNotFoundException;
-import main.stdpMath;
 
 /**
  * <p>
