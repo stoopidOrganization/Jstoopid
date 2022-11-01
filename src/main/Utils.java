@@ -69,11 +69,11 @@ public class Utils {
         return result;
     }
 
-    public static String combineArgs(String[] args) {
+    public static String combineArgs(String[] args, int start, int end) {
         String result = "";
 
-        for (String str : args) {
-            result += str;
+        for (int i = start; i < args.length || i < end; i++) {
+            result += args[i];
         }
 
         return result;
