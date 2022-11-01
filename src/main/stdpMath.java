@@ -192,4 +192,18 @@ public class stdpMath {
     public static boolean isOperator(String operator) {
         return operator.equals("+") || operator.equals("-") || operator.equals("*") || operator.equals("/") || operator.equals("%") || operator.equals("^");
     }
+
+    /**
+     * @param str to be checked
+     * @return if given input is an equasion
+     */
+    public static boolean isEquasion(String str) {
+        char[] list = str.toCharArray();
+        
+        for (char c : list) {
+            if (!(Utils.isNumber(String.valueOf(c)) || isOperator(String.valueOf(c)) || c == '(' || c == ')' || c == '.')) return false;
+        }
+
+        return true;
+    }
 }

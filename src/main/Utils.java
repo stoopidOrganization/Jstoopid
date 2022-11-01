@@ -3,6 +3,7 @@ package main;
 import exceptions.InvalidOperatorException;
 import exceptions.InvalidTypeException;
 import exceptions.VariableNotFoundException;
+import main.stdpMath;
 
 /**
  * <p>
@@ -23,16 +24,6 @@ public class Utils {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    public static boolean isEquasion(String str) {
-        char[] list = str.toCharArray();
-        
-        for (char c : list) {
-            if (!(isNumber(String.valueOf(c)) || stdpMath.isOperator(String.valueOf(c)) || c == '(' || c == ')' || c == '.')) return false;
-        }
-
-        return true;
     }
 
     /**
@@ -58,7 +49,7 @@ public class Utils {
     public static String getValue(String value) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
         String result = null;
 
-        if (isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));
+        if (stdpMath.isEquasion(value)) result = String.valueOf(stdpMath.solveEquasion(value));
         else if (isBool(value)) result = value;
         else if (isString(value)) result = value;
         else if (Main.varMan.isVariable(value)) result = Main.varMan.getVariableAsString(value);
