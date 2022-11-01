@@ -8,13 +8,6 @@ import java.util.Stack;
 public class stdpMath {
     public static double solveEquasion(String equasion) {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
-
-        for (String s : equasionInRPN) {
-            System.out.print(s + " ");
-        }
-
-        System.out.println();
-
         Stack<String> storage = new Stack<>();
 
         while (!equasionInRPN.isEmpty()) {
