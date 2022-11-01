@@ -8,6 +8,12 @@ import java.util.Stack;
 import exceptions.InvalidOperatorException;
 
 public class stdpMath {
+    /**
+     * Solves the given equasion
+     * @param equasion
+     * @return solved equasion
+     * @throws InvalidOperatorException
+     */
     public static double solveEquasion(String equasion) throws InvalidOperatorException {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
