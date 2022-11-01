@@ -21,6 +21,12 @@ public class stdpMath {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
 
+        /* debug code to print out the rpn equasion
+        System.out.print("Equasion: ");
+        for (String str : equasionInRPN) System.out.print(str + " ");
+        System.out.println();
+         */
+
         while (!equasionInRPN.isEmpty()) {
             String current = equasionInRPN.peek();
             equasionInRPN.remove();
@@ -41,10 +47,17 @@ public class stdpMath {
         return Double.parseDouble(storage.peek());
     }
 
+    /**
+     * Converts an infix equasion into a reverse polish notation equasion
+     * @param equasion
+     * @return Queue in rpn
+     * @throws InvalidOperatorException
+     */
     private static Queue<String> convertToRPN(ArrayList<String> equasion) throws InvalidOperatorException {
-        ArrayList<Stack<String>> operators = new ArrayList<>();
         Queue<String> equasionInRPN = new LinkedList<>();
-
+        
+        // saves the operators in a list of stacks, each stack is a bracket an will be deleted when bracket is closed
+        ArrayList<Stack<String>> operators = new ArrayList<>();
         operators.add(new Stack<>());
         int currentStack = 0;
 
@@ -52,15 +65,20 @@ public class stdpMath {
             String current = equasion.get(i);
 
             if (Utils.isNumber(current)) {
+                // if number then add to result
                 equasionInRPN.add(current);
             } else if (isOperator(current) && operators.get(currentStack).isEmpty()) {
+                // if first operator then add to stack
                 operators.get(currentStack).add(current);
             } else if (isOperator(current) && calcOperatorScore(current) >= calcOperatorScore(operators.get(currentStack).peek())) {
+                // if another operator thats better or equal to the one the top of the stack that add it to that
                 operators.get(currentStack).add(current);
             } else if (current.contains("(")) {
+                // move to a higher stack when open bracket is found
                 currentStack++;
                 operators.add(new Stack<>());
             } else if (current.contains(")")) {
+                // clear the highest stack and add the contents to the result when close bracket is found
                 while (!operators.get(currentStack).isEmpty()) {
                     equasionInRPN.add(operators.get(currentStack).peek());
                     operators.get(currentStack).pop();
@@ -69,6 +87,7 @@ public class stdpMath {
                 operators.remove(currentStack);
                 currentStack--;
             } else {
+                // if an operator with a lower status is found add all operators to the queue until the current operator is better or equal to the top of the stack
                 while (!operators.get(currentStack).isEmpty()) {
                     if (calcOperatorScore(current) < calcOperatorScore(operators.get(currentStack).peek())) {
                         equasionInRPN.add(operators.get(currentStack).peek());
@@ -80,9 +99,13 @@ public class stdpMath {
             }
         }
 
-        while (!operators.get(currentStack).isEmpty()) {
-            equasionInRPN.add(operators.get(currentStack).peek());
-            operators.get(currentStack).pop();
+        // clear all remainging elements in the stack
+        while (currentStack >= 0) {
+            while (!operators.get(currentStack).isEmpty()) {
+                equasionInRPN.add(operators.get(currentStack).peek());
+                operators.get(currentStack).pop();
+            }
+            currentStack--;
         }
 
         return equasionInRPN;
@@ -160,7 +183,7 @@ public class stdpMath {
      * @return score
      * @throws InvalidOperatorException
      */
-    public static int calcOperatorScore(String operator) throws InvalidOperatorException {
+    private static int calcOperatorScore(String operator) throws InvalidOperatorException {
         switch (operator) {
             case "+":
                 return 0;

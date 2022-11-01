@@ -95,9 +95,11 @@ public class Main {
                             else throw new VariableNotFoundException(linepieces[0]);
                         }
 
+                        // dont throw errors on empty lines and comments
                         if (linepieces[0].equals("")) break;
                         else if (linepieces[0].startsWith("#")) break;
 
+                        // throws an error when the keyword isnt recognize
                         throw new InvalidKeywordException(linepieces[0]);
                 }
             } catch (Exception e) {
