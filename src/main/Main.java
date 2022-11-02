@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import exceptions.InvalidKeywordException;
 import exceptions.VariableNotFoundException;
+import exceptions.stpdException;
 import variables.VariableManager;
 
 /**
@@ -102,7 +103,7 @@ public class Main {
                         // throws an error when the keyword isnt recognize
                         throw new InvalidKeywordException(linepieces[0]);
                 }
-            } catch (Exception e) {
+            } catch (stpdException e) {
                 System.err.println("Your Script crashed in line " + i + ":\n\t" + e);
                 return;
             }

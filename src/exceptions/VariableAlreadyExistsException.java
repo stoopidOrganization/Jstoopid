@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Can be thrown when a variable with given name already exists
  */
-public class VariableAlreadyExistsException extends Exception {
+public class VariableAlreadyExistsException extends stpdException {
     /**
      * @param name of the variable
      */
