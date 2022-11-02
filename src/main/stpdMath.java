@@ -6,6 +6,8 @@ import java.util.Queue;
 import java.util.Stack;
 
 import exceptions.InvalidOperatorException;
+import exceptions.InvalidTypeException;
+import exceptions.VariableNotFoundException;
 
 /**
  * Handles all math systems of the language
@@ -16,8 +18,9 @@ public class stpdMath {
      * @param equasion
      * @return solved equasion
      * @throws InvalidOperatorException
+     * @throws InvalidTypeException
      */
-    public static double solveEquasion(String equasion) throws InvalidOperatorException {
+    public static double solveEquasion(String equasion) throws InvalidOperatorException, InvalidTypeException {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
 
@@ -115,18 +118,16 @@ public class stpdMath {
      * Spilts the equasion into its parts
      * @param equasion
      * @return list of all parts in the equasion
+     * @throws InvalidTypeException
      */
-    private static ArrayList<String> splitEquasion(String equasion) {
+    private static ArrayList<String> splitEquasion(String equasion) throws InvalidTypeException {
         String cache = "";
         // puts the equasion into a list of chars without spaceys
         char[] list = equasion.replaceAll(" ", "").toCharArray();
         ArrayList<String> equasionAsList = new ArrayList<>();
 
         for (int i = 0; i < list.length; i++) {
-            if (Utils.isNumber(String.valueOf(list[i])) || list[i] == '.') {
-                // if number add to cache
-                cache += list[i];
-            } else {
+            if (isOperator(String.valueOf(list[i])) || list[i] == '(' || list[i] == ')') {
                 // if operator is actually part of a negative number then add it to the cache
                 if (list[i] == '-') {
                     if (i == 0) {
@@ -140,8 +141,19 @@ public class stpdMath {
 
                 // if the cache isnt empty and an operator is found, add it to the result
                 if (cache != "") {
-                    equasionAsList.add(cache);
-                    cache = "";
+                    if (Main.varMan.isVariable(cache)) {
+                        try {
+                            if (Main.varMan.getVariableType(cache).equals("num")) {
+                                equasionAsList.add(Main.varMan.getVariableAsString(cache));
+                                cache = "";
+                            } else {
+                                throw new InvalidTypeException(cache);
+                            }
+                        } catch (VariableNotFoundException e) {}
+                    } else if (Utils.isNumber(cache)) {
+                        equasionAsList.add(cache);
+                        cache = "";
+                    } else throw new InvalidTypeException(cache);
                 }
 
                 // add operators and brackets to the list
@@ -152,6 +164,8 @@ public class stpdMath {
                 } else if (list[i] == ')') {
                     equasionAsList.add(")");
                 }
+            } else {
+                cache += list[i];
             }
         }
         

@@ -56,15 +56,10 @@ public class Utils {
      * @throws InvalidOperatorException
      */
     public static String getValue(String input) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
-        String result = null;
 
-        if (stpdMath.isEquasion(input)) result = String.valueOf(stpdMath.solveEquasion(input));
-        else if (isBool(input)) result = input;
-        else if (isString(input)) result = input;
-        else if (Main.varMan.isVariable(input)) result = Main.varMan.getVariableAsString(input);
-        else throw new InvalidTypeException(input);
-
-        return result;
+        if (isString(input)) return input;
+        else if (isBool(input)) return input;
+        else return String.valueOf(stpdMath.solveEquasion(input));
     }
 
     /**
