@@ -1,8 +1,6 @@
 package main;
 
-import exceptions.InvalidOperatorException;
-import exceptions.InvalidTypeException;
-import exceptions.VariableNotFoundException;
+import exceptions.stpdException;
 
 /**
  * <p>
@@ -51,12 +49,9 @@ public class Utils {
      * Solves Equasions, resolves variables
      * @param input
      * @return solved value
-     * @throws InvalidTypeException
-     * @throws VariableNotFoundException
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    public static String getValue(String input) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
-
+    public static String getValue(String input) throws stpdException {
         if (isString(input)) return input;
         else if (isBool(input)) return input;
         else return String.valueOf(stpdMath.solveEquasion(input));

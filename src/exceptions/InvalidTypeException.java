@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Can be thrown when the given input isnt recognized to be any type
  */
-public class InvalidTypeException extends Exception {
+public class InvalidTypeException extends stpdException {
     /**
      * @param value that isnt any type
      */

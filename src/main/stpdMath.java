@@ -8,6 +8,7 @@ import java.util.Stack;
 import exceptions.InvalidOperatorException;
 import exceptions.InvalidTypeException;
 import exceptions.VariableNotFoundException;
+import exceptions.stpdException;
 
 /**
  * Handles all math systems of the language
@@ -17,10 +18,9 @@ public class stpdMath {
      * Solves the given equasion
      * @param equasion
      * @return solved equasion
-     * @throws InvalidOperatorException
-     * @throws InvalidTypeException
+     * @throws stpdException
      */
-    public static double solveEquasion(String equasion) throws InvalidOperatorException, InvalidTypeException {
+    public static double solveEquasion(String equasion) throws stpdException {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
 
@@ -54,9 +54,9 @@ public class stpdMath {
      * Converts an infix equasion into a reverse polish notation equasion
      * @param equasion
      * @return Queue in rpn
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static Queue<String> convertToRPN(ArrayList<String> equasion) throws InvalidOperatorException {
+    private static Queue<String> convertToRPN(ArrayList<String> equasion) throws stpdException {
         Queue<String> equasionInRPN = new LinkedList<>();
         
         // saves the operators in a list of stacks, each stack is a bracket an will be deleted when bracket is closed
@@ -120,7 +120,7 @@ public class stpdMath {
      * @return list of all parts in the equasion
      * @throws InvalidTypeException
      */
-    private static ArrayList<String> splitEquasion(String equasion) throws InvalidTypeException {
+    private static ArrayList<String> splitEquasion(String equasion) throws stpdException {
         String cache = "";
         // puts the equasion into a list of chars without spaceys
         char[] list = equasion.replaceAll(" ", "").toCharArray();
@@ -180,9 +180,9 @@ public class stpdMath {
      * @param num2
      * @param operator
      * @return the solved equasion
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static String solveSimpleEquasion(String num1, String num2, String operator) throws InvalidOperatorException {
+    private static String solveSimpleEquasion(String num1, String num2, String operator) throws stpdException {
         switch (operator) {
             case "+":
                 return String.valueOf(Double.parseDouble(num1) + Double.parseDouble(num2));
@@ -213,9 +213,9 @@ public class stpdMath {
      * higher = more important
      * @param operator
      * @return score
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static int calcOperatorScore(String operator) throws InvalidOperatorException {
+    private static int calcOperatorScore(String operator) throws stpdException {
         switch (operator) {
             case "+":
                 return 0;

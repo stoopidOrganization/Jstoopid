@@ -6,6 +6,7 @@ import exceptions.InvalidTypeException;
 import exceptions.VariableAlreadyExistsException;
 import exceptions.VariableNotFoundException;
 import exceptions.WrongTypeException;
+import exceptions.stpdException;
 import main.Utils;
 
 /**
@@ -42,8 +43,9 @@ public class VariableManager {
      * </ul>
      * @param value
      * @return type of value
+     * @throws stpdException
      */
-    public String getType(String value) throws InvalidTypeException {
+    public String getType(String value) throws stpdException {
         if (Utils.isBool(value)) {
             return "boolean";
         } else if (Utils.isNumber(value)) {
@@ -68,8 +70,9 @@ public class VariableManager {
      * </ul>
      * @param name of the Variable
      * @return type of Variable
+     * @throws stpdException
      */
-    public String getVariableType(String name) throws VariableNotFoundException {
+    public String getVariableType(String name) throws stpdException {
         for (stpdBool i : bools) {
             if(i.getName().equals(name)) return "bool";
         }
@@ -89,8 +92,9 @@ public class VariableManager {
      * Get the value of a Variable with type bool
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stpdBool getBoolVariable(String name) throws VariableNotFoundException {
+    public stpdBool getBoolVariable(String name) throws stpdException {
         for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i;
         }
@@ -102,8 +106,9 @@ public class VariableManager {
      * Get the value of a Variable with type num
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stpdNum getNumVariable(String name) throws VariableNotFoundException {
+    public stpdNum getNumVariable(String name) throws stpdException {
         for (stpdNum i : nums) {
             if(i.getName().equals(name)) return i;
         }
@@ -115,8 +120,9 @@ public class VariableManager {
      * Get the value of a Variable with type str
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stpdStr getStrVariable(String name) throws VariableNotFoundException {
+    public stpdStr getStrVariable(String name) throws stpdException {
         for (stpdStr i : strs) {
             if(i.getName().equals(name)) return i;
         }
@@ -148,9 +154,9 @@ public class VariableManager {
      * Creates a new Variable
      * @param name of the Variable
      * @param value of the Variable
-     * @throws Exception
+     * @throws stpdException
      */
-    public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException, VariableAlreadyExistsException {
+    public void newVariable(String name, String value) throws stpdException {
         if(isVariable(name)) throw new VariableAlreadyExistsException(name);
 
         if (Utils.isBool(value)) {
@@ -168,8 +174,9 @@ public class VariableManager {
      * Returns Value of any Variable as a String
      * @param name of the Variable
      * @return value of the Variable as String
+     * @throws stpdException
      */
-    public String getVariableAsString(String name) throws VariableNotFoundException {
+    public String getVariableAsString(String name) throws stpdException {
         for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
         }
@@ -189,8 +196,9 @@ public class VariableManager {
      * Changes the Value of amy Variable
      * @param name of the variable
      * @param value that the variable should be set to
+     * @throws stpdException
      */
-    public void changeVariable(String name, String value) throws InvalidTypeException, WrongTypeException, VariableNotFoundException {
+    public void changeVariable(String name, String value) throws stpdException {
         if(getType(value) != getVariableType(name)) throw new WrongTypeException(value, name, getType(value), getVariableType(name));
 
         switch (getType(value)) {
