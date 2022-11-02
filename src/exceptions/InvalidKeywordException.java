@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Can be thrown when the given keyword is invalid
  */
-public class InvalidKeywordException extends Exception {
+public class InvalidKeywordException extends stpdException {
     /**
      * @param keyword that isnt recognized
      */

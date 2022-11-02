@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Can be thrown when the value thats being assigned to a variable has a different type than the variable
  */
-public class WrongTypeException extends Exception {
+public class WrongTypeException extends stpdException {
     /**
      * @param value thats being assigned
      * @param varName name of the variable

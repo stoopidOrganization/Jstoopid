@@ -6,18 +6,21 @@ import java.util.Queue;
 import java.util.Stack;
 
 import exceptions.InvalidOperatorException;
+import exceptions.InvalidTypeException;
+import exceptions.VariableNotFoundException;
+import exceptions.stpdException;
 
 /**
  * Handles all math systems of the language
  */
-public class stdpMath {
+public class stpdMath {
     /**
      * Solves the given equasion
      * @param equasion
      * @return solved equasion
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    public static double solveEquasion(String equasion) throws InvalidOperatorException {
+    public static double solveEquasion(String equasion) throws stpdException {
         Queue<String> equasionInRPN = convertToRPN(splitEquasion(equasion));
         Stack<String> storage = new Stack<>();
 
@@ -51,9 +54,9 @@ public class stdpMath {
      * Converts an infix equasion into a reverse polish notation equasion
      * @param equasion
      * @return Queue in rpn
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static Queue<String> convertToRPN(ArrayList<String> equasion) throws InvalidOperatorException {
+    private static Queue<String> convertToRPN(ArrayList<String> equasion) throws stpdException {
         Queue<String> equasionInRPN = new LinkedList<>();
         
         // saves the operators in a list of stacks, each stack is a bracket an will be deleted when bracket is closed
@@ -115,18 +118,16 @@ public class stdpMath {
      * Spilts the equasion into its parts
      * @param equasion
      * @return list of all parts in the equasion
+     * @throws InvalidTypeException
      */
-    private static ArrayList<String> splitEquasion(String equasion) {
+    private static ArrayList<String> splitEquasion(String equasion) throws stpdException {
         String cache = "";
         // puts the equasion into a list of chars without spaceys
         char[] list = equasion.replaceAll(" ", "").toCharArray();
         ArrayList<String> equasionAsList = new ArrayList<>();
 
         for (int i = 0; i < list.length; i++) {
-            if (Utils.isNumber(String.valueOf(list[i])) || list[i] == '.') {
-                // if number add to cache
-                cache += list[i];
-            } else {
+            if (isOperator(String.valueOf(list[i])) || list[i] == '(' || list[i] == ')') {
                 // if operator is actually part of a negative number then add it to the cache
                 if (list[i] == '-') {
                     if (i == 0) {
@@ -140,8 +141,19 @@ public class stdpMath {
 
                 // if the cache isnt empty and an operator is found, add it to the result
                 if (cache != "") {
-                    equasionAsList.add(cache);
-                    cache = "";
+                    if (Main.varMan.isVariable(cache)) {
+                        try {
+                            if (Main.varMan.getVariableType(cache).equals("num")) {
+                                equasionAsList.add(Main.varMan.getVariableAsString(cache));
+                                cache = "";
+                            } else {
+                                throw new InvalidTypeException(cache);
+                            }
+                        } catch (VariableNotFoundException e) {}
+                    } else if (Utils.isNumber(cache)) {
+                        equasionAsList.add(cache);
+                        cache = "";
+                    } else throw new InvalidTypeException(cache);
                 }
 
                 // add operators and brackets to the list
@@ -152,10 +164,24 @@ public class stdpMath {
                 } else if (list[i] == ')') {
                     equasionAsList.add(")");
                 }
+            } else {
+                cache += list[i];
             }
         }
         
-        equasionAsList.add(cache);
+        if (Main.varMan.isVariable(cache)) {
+            try {
+                if (Main.varMan.getVariableType(cache).equals("num")) {
+                    equasionAsList.add(Main.varMan.getVariableAsString(cache));
+                    cache = "";
+                } else {
+                    throw new InvalidTypeException(cache);
+                }
+            } catch (VariableNotFoundException e) {}
+        } else if (Utils.isNumber(cache)) {
+            equasionAsList.add(cache);
+            cache = "";
+        } else throw new InvalidTypeException(cache);
         
         return equasionAsList;
     }
@@ -166,9 +192,9 @@ public class stdpMath {
      * @param num2
      * @param operator
      * @return the solved equasion
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static String solveSimpleEquasion(String num1, String num2, String operator) throws InvalidOperatorException {
+    private static String solveSimpleEquasion(String num1, String num2, String operator) throws stpdException {
         switch (operator) {
             case "+":
                 return String.valueOf(Double.parseDouble(num1) + Double.parseDouble(num2));
@@ -199,9 +225,9 @@ public class stdpMath {
      * higher = more important
      * @param operator
      * @return score
-     * @throws InvalidOperatorException
+     * @throws stpdException
      */
-    private static int calcOperatorScore(String operator) throws InvalidOperatorException {
+    private static int calcOperatorScore(String operator) throws stpdException {
         switch (operator) {
             case "+":
                 return 0;

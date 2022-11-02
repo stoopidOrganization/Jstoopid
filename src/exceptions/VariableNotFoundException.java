@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Can be thrown when a variable with the given name can not be found
  */
-public class VariableNotFoundException extends Exception {
+public class VariableNotFoundException extends stpdException {
     /**
      * @param name of the Variable
      */

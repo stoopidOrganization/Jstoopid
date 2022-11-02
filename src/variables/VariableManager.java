@@ -6,6 +6,7 @@ import exceptions.InvalidTypeException;
 import exceptions.VariableAlreadyExistsException;
 import exceptions.VariableNotFoundException;
 import exceptions.WrongTypeException;
+import exceptions.stpdException;
 import main.Utils;
 
 /**
@@ -16,9 +17,9 @@ import main.Utils;
  * </p>
  */
 public class VariableManager {
-    private ArrayList<stdpBool> bools;
-    private ArrayList<stdpNum> nums;
-    private ArrayList<stdpStr> strs;
+    private ArrayList<stpdBool> bools;
+    private ArrayList<stpdNum> nums;
+    private ArrayList<stpdStr> strs;
 
     /**
      * Initializes the Lists for the global Variables
@@ -42,8 +43,9 @@ public class VariableManager {
      * </ul>
      * @param value
      * @return type of value
+     * @throws stpdException
      */
-    public String getType(String value) throws InvalidTypeException {
+    public String getType(String value) throws stpdException {
         if (Utils.isBool(value)) {
             return "boolean";
         } else if (Utils.isNumber(value)) {
@@ -68,18 +70,19 @@ public class VariableManager {
      * </ul>
      * @param name of the Variable
      * @return type of Variable
+     * @throws stpdException
      */
-    public String getVariableType(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+    public String getVariableType(String name) throws stpdException {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return "bool";
         }
 
-        for (stdpNum i : nums) {
-            if(i.getName().equals(name)) return "number";
+        for (stpdNum i : nums) {
+            if(i.getName().equals(name)) return "num";
         }
 
-        for (stdpStr i : strs) {
-            if(i.getName().equals(name)) return "string";
+        for (stpdStr i : strs) {
+            if(i.getName().equals(name)) return "str";
         }
 
         throw new VariableNotFoundException(name);
@@ -89,9 +92,10 @@ public class VariableManager {
      * Get the value of a Variable with type bool
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stdpBool getBoolVariable(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+    public stpdBool getBoolVariable(String name) throws stpdException {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -102,9 +106,10 @@ public class VariableManager {
      * Get the value of a Variable with type num
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stdpNum getNumVariable(String name) throws VariableNotFoundException {
-        for (stdpNum i : nums) {
+    public stpdNum getNumVariable(String name) throws stpdException {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -115,9 +120,10 @@ public class VariableManager {
      * Get the value of a Variable with type str
      * @param name of the Variable
      * @return value of the Variable
+     * @throws stpdException
      */
-    public stdpStr getStrVariable(String name) throws VariableNotFoundException {
-        for (stdpStr i : strs) {
+    public stpdStr getStrVariable(String name) throws stpdException {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -129,15 +135,15 @@ public class VariableManager {
      * @return if variable exists
      */
     public boolean isVariable(String name) {
-        for (stdpBool i : bools) {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpNum i : nums) {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpStr i : strs) {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return true;
         }
 
@@ -148,17 +154,17 @@ public class VariableManager {
      * Creates a new Variable
      * @param name of the Variable
      * @param value of the Variable
-     * @throws Exception
+     * @throws stpdException
      */
-    public void newVariable(String name, String value) throws InvalidTypeException, VariableNotFoundException, VariableAlreadyExistsException {
+    public void newVariable(String name, String value) throws stpdException {
         if(isVariable(name)) throw new VariableAlreadyExistsException(name);
 
         if (Utils.isBool(value)) {
-            this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
+            this.bools.add(new stpdBool(name, Boolean.parseBoolean(value)));
         } else if (Utils.isNumber(value)) {
-            this.nums.add(new stdpNum(name, Double.parseDouble(value)));
+            this.nums.add(new stpdNum(name, Double.parseDouble(value)));
         } else if (Utils.isString(value)) {
-            this.strs.add(new stdpStr(name, value));
+            this.strs.add(new stpdStr(name, value));
         } else {
             throw new InvalidTypeException(value);
         }
@@ -168,17 +174,18 @@ public class VariableManager {
      * Returns Value of any Variable as a String
      * @param name of the Variable
      * @return value of the Variable as String
+     * @throws stpdException
      */
-    public String getVariableAsString(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+    public String getVariableAsString(String name) throws stpdException {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpNum i : nums) {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpStr i : strs) {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return i.toString();
         }
 
@@ -189,8 +196,9 @@ public class VariableManager {
      * Changes the Value of amy Variable
      * @param name of the variable
      * @param value that the variable should be set to
+     * @throws stpdException
      */
-    public void changeVariable(String name, String value) throws InvalidTypeException, WrongTypeException, VariableNotFoundException {
+    public void changeVariable(String name, String value) throws stpdException {
         if(getType(value) != getVariableType(name)) throw new WrongTypeException(value, name, getType(value), getVariableType(name));
 
         switch (getType(value)) {

@@ -1,12 +1,7 @@
-var a = "hi"
+var a = 1
 
 out a
-out 1.1 + 1.1
-out false 
-# out "deez"
 
-# test keyword that doesnt exist
+a = a + 1
 
-out 1 + 2
-
-out ((3^2) / 3) + 1
+goto 3
