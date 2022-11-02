@@ -1,8 +1,6 @@
 package main;
 
-import exceptions.InvalidOperatorException;
 import exceptions.InvalidTypeException;
-import exceptions.VariableNotFoundException;
 import exceptions.stpdException;
 
 /**
