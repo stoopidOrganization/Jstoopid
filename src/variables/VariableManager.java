@@ -78,11 +78,11 @@ public class VariableManager {
         }
 
         for (stpdNum i : nums) {
-            if(i.getName().equals(name)) return "number";
+            if(i.getName().equals(name)) return "num";
         }
 
         for (stpdStr i : strs) {
-            if(i.getName().equals(name)) return "string";
+            if(i.getName().equals(name)) return "str";
         }
 
         throw new VariableNotFoundException(name);

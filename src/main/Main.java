@@ -94,6 +94,8 @@ public class Main {
                         if (linepieces.length > 1 && linepieces[1].equals("=")) {
                             if (varMan.isVariable(linepieces[0])) varMan.changeVariable(linepieces[0], Utils.getValue(Utils.combineArgs(linepieces, 2)));
                             else throw new VariableNotFoundException(linepieces[0]);
+
+                            break;
                         }
 
                         // dont throw errors on empty lines and comments

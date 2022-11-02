@@ -169,7 +169,19 @@ public class stpdMath {
             }
         }
         
-        equasionAsList.add(cache);
+        if (Main.varMan.isVariable(cache)) {
+            try {
+                if (Main.varMan.getVariableType(cache).equals("num")) {
+                    equasionAsList.add(Main.varMan.getVariableAsString(cache));
+                    cache = "";
+                } else {
+                    throw new InvalidTypeException(cache);
+                }
+            } catch (VariableNotFoundException e) {}
+        } else if (Utils.isNumber(cache)) {
+            equasionAsList.add(cache);
+            cache = "";
+        } else throw new InvalidTypeException(cache);
         
         return equasionAsList;
     }
