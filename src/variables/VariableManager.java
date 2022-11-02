@@ -16,9 +16,9 @@ import main.Utils;
  * </p>
  */
 public class VariableManager {
-    private ArrayList<stdpBool> bools;
-    private ArrayList<stdpNum> nums;
-    private ArrayList<stdpStr> strs;
+    private ArrayList<stpdBool> bools;
+    private ArrayList<stpdNum> nums;
+    private ArrayList<stpdStr> strs;
 
     /**
      * Initializes the Lists for the global Variables
@@ -70,15 +70,15 @@ public class VariableManager {
      * @return type of Variable
      */
     public String getVariableType(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return "bool";
         }
 
-        for (stdpNum i : nums) {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return "number";
         }
 
-        for (stdpStr i : strs) {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return "string";
         }
 
@@ -90,8 +90,8 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpBool getBoolVariable(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+    public stpdBool getBoolVariable(String name) throws VariableNotFoundException {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -103,8 +103,8 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpNum getNumVariable(String name) throws VariableNotFoundException {
-        for (stdpNum i : nums) {
+    public stpdNum getNumVariable(String name) throws VariableNotFoundException {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -116,8 +116,8 @@ public class VariableManager {
      * @param name of the Variable
      * @return value of the Variable
      */
-    public stdpStr getStrVariable(String name) throws VariableNotFoundException {
-        for (stdpStr i : strs) {
+    public stpdStr getStrVariable(String name) throws VariableNotFoundException {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return i;
         }
 
@@ -129,15 +129,15 @@ public class VariableManager {
      * @return if variable exists
      */
     public boolean isVariable(String name) {
-        for (stdpBool i : bools) {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpNum i : nums) {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return true;
         }
 
-        for (stdpStr i : strs) {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return true;
         }
 
@@ -154,11 +154,11 @@ public class VariableManager {
         if(isVariable(name)) throw new VariableAlreadyExistsException(name);
 
         if (Utils.isBool(value)) {
-            this.bools.add(new stdpBool(name, Boolean.parseBoolean(value)));
+            this.bools.add(new stpdBool(name, Boolean.parseBoolean(value)));
         } else if (Utils.isNumber(value)) {
-            this.nums.add(new stdpNum(name, Double.parseDouble(value)));
+            this.nums.add(new stpdNum(name, Double.parseDouble(value)));
         } else if (Utils.isString(value)) {
-            this.strs.add(new stdpStr(name, value));
+            this.strs.add(new stpdStr(name, value));
         } else {
             throw new InvalidTypeException(value);
         }
@@ -170,15 +170,15 @@ public class VariableManager {
      * @return value of the Variable as String
      */
     public String getVariableAsString(String name) throws VariableNotFoundException {
-        for (stdpBool i : bools) {
+        for (stpdBool i : bools) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpNum i : nums) {
+        for (stpdNum i : nums) {
             if(i.getName().equals(name)) return i.toString();
         }
 
-        for (stdpStr i : strs) {
+        for (stpdStr i : strs) {
             if(i.getName().equals(name)) return i.toString();
         }
 

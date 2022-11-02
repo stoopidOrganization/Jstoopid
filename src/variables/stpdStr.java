@@ -2,23 +2,23 @@ package variables;
 
 /**
  * <p>
- * Variable of type Number
+ * Variable of type String
  * <br><br>
  * Child of Variable
  * </p>
  */
-public class stdpNum extends Variable {
+public class stpdStr extends Variable {
     /**
      * Value of the Variable
      */
-    private double value;
+    private String value;
     
     /**
-     * Initializes a new Variable of the type Number
+     * Initializes a new Variable of the type String
      * @param name of the Variable
      * @param value of the Variable
      */
-    public stdpNum(String name, double value) {
+    public stpdStr(String name, String value) {
         super(name);
         this.value = value;
     }
@@ -26,7 +26,7 @@ public class stdpNum extends Variable {
     /**
      * @return Value of the Variable
      */
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -34,7 +34,7 @@ public class stdpNum extends Variable {
      * Sets a new Value for the Variable
      * @param value of the Variable
      */
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
     

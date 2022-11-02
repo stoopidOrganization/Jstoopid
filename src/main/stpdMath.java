@@ -10,7 +10,7 @@ import exceptions.InvalidOperatorException;
 /**
  * Handles all math systems of the language
  */
-public class stdpMath {
+public class stpdMath {
     /**
      * Solves the given equasion
      * @param equasion

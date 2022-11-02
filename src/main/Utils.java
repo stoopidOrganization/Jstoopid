@@ -58,7 +58,7 @@ public class Utils {
     public static String getValue(String input) throws InvalidTypeException, VariableNotFoundException, InvalidOperatorException {
         String result = null;
 
-        if (stdpMath.isEquasion(input)) result = String.valueOf(stdpMath.solveEquasion(input));
+        if (stpdMath.isEquasion(input)) result = String.valueOf(stpdMath.solveEquasion(input));
         else if (isBool(input)) result = input;
         else if (isString(input)) result = input;
         else if (Main.varMan.isVariable(input)) result = Main.varMan.getVariableAsString(input);
